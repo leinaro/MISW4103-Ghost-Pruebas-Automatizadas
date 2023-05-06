@@ -45,7 +45,11 @@ Las funcionalidades a probar se escogieron de la lista de funcionalidades defini
 - Iniciar sesión, ir a la pestaña de post, crear post con nombre y una descripción, publicar post, verificar que el post se creará, entrar en el post creado, entrar en la pestaña de settings,
 
 4. Agregar Usuario
-- iniciar sesión, ir a la pestaña miembros, click nuevo miembro completar los campos y por último dar click en guardar, ingresar a miembros y verificar que se haya agregado correctamente. 
+- Iniciar sesión, ir a la pestaña miembros, click nuevo miembro completar los campos y por último dar click en guardar, ingresar a miembros y verificar que se haya agregado correctamente. 
+- Iniciar sesión, ir a la pestaña miembros, click nuevo miembro completar los campos y agregar un email, dar en crear usuario, verificar aparición de ventana avisando del envío del correo de confirmación.
+- Iniciar sesión, ir a la pestaña miembros, click nuevo miembro completar los campos y agregar una descripción que sea mayor a 200 palabras, dar en crear usuario, deberá avisar sobre la posible falla.
+- Iniciar sesión, ir a la pestaña miembros, click nuevo miembro completar los campos excepto el nombre , dar en crear usuario, deberá avisar sobre la posible falla.
+
 
 5. Modificar usuario 
 - iniciar sesión, ir a la pestaña miembros, clic el usuario o miembro creado, modificar nombre del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren 
