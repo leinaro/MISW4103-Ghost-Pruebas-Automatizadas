@@ -56,7 +56,7 @@ Las funcionalidades a probar se escogieron de la lista de funcionalidades defini
 | *agregar staff sin nombre|- Iniciar sesión, ir a la pestaña miembros, click nuevo miembro completar los campos excepto el nombre , dar en crear usuario, deberá avisar sobre la posible falla.||
 |5. Modificar usuario |||
 |cambiar nombre |- iniciar sesión, navegar al detalle de un miembro, modificar nombre del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren | x |
-| modificar correo|- iniciar sesión, ir a la pestaña miembros, clic el usuario o miembro creado, modificar correo del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren ||
+| modificar correo|- iniciar sesión, ir a la pestaña miembros, clic el usuario o miembro creado, modificar correo del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren |x|
 |* modificar nota|- iniciar sesión, ir a la pestaña miembros, clic el usuario o miembro creado, modificar nota del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren| |
 |* modificar bio|- iniciar sesión, ir a la pestaña miembros, clic el usuario o miembro creado, modificar bio del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren| |
 
