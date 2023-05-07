@@ -176,6 +176,16 @@ When('I select schedule post', async function () {
 
 });
 
+When('I select reschedule post', async function () {
+
+    await new Promise(r => setTimeout(r, 300))
+    let publishDropdown = await this.driver.$(".ember-basic-dropdown-trigger");
+    await publishDropdown.click();
+    let publishButton = await this.driver.$(".gh-btn.gh-btn-blue.gh-publishmenu-button.gh-btn-icon.ember-view");
+    return await publishButton.click();
+
+});
+
 When('I create new tag with {kraken-string}', async function (name) {
     let elementNewTag = await this.driver.$("a[href='#/tags/new/']");
     await elementNewTag.click();
