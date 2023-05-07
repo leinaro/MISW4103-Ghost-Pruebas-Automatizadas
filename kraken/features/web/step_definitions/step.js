@@ -1,7 +1,7 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const expect = require('chai').expect;
 
-Given, When('I go to page {kraken-string} {kraken-string}', async function (host, url) {
+Given, When, Then('I go to page {kraken-string} {kraken-string}', async function (host, url) {
     await new Promise(r => setTimeout(r, 5000))
     console.log(">>>>>>>>>>>"+host+url);
     return await this.driver.url(host+url);
@@ -74,6 +74,14 @@ When('I update the user name to {kraken-string}', async function (newName) {
     return await elementSave.click();
 });
 
+When('I update the user email to {kraken-string}', async function (newEmail) {
+    let userEmail = await this.driver.$("#user-email");
+    await userEmail.setValue(newEmail);
+    await new Promise(r => setTimeout(r, 300))
+    let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
+    return await elementSave.click();
+});
+
 When('I click on view post from settings', async function () {
     let settingsButton = await this.driver.$(".post-settings");
     await settingsButton.click();
@@ -118,6 +126,25 @@ Then('I validate the user {kraken-string} exists', async function (email) {
 
     let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + email + "']");
     return expect(await userItem.isExisting()).to.be.true;
+});
+
+Then('I validate the user email {kraken-string} exists', async function (email) {
+    await new Promise(r => setTimeout(r, 1000))
+    let userEmail = await this.driver.$("#user-email");
+    return expect(userEmail).to.have.string(email);
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + email + "']");
+    return expect(await userItem.isExisting()).to.be.true;
+});
+
+When, Then('I revoke invitations', async function () {
+    await new Promise(r => setTimeout(r, 1000))
+    let revokeButton = await this.driver.$("a.apps-configured-action.red-hover");
+    return await revokeButton.click()
+});
+
+Then('I validate invitation for {kraken-string} not exists', async function (email) {
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + email + "']");
+    return expect(await userItem.isExisting()).to.be.false;
 });
 
 

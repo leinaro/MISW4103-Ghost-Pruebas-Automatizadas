@@ -51,12 +51,13 @@ Las funcionalidades a probar se escogieron de la lista de funcionalidades defini
 |4. Agregar Usuario|||
 |agregar staff|- Iniciar sesión, ir a la pestaña staff, click invite staff agregar un correo y por último dar click en invitar, navegar a staff y verificar que se haya agregado correctamente. | x |
 |validar ventana envio correo |- Iniciar sesión, ir a la pestaña miembros, click nuevo miembro completar los campos y agregar un email, click en crear usuario, verificar aparición de ventana avisando del envío del correo de confirmación.||
+|Remover invitacion de usuario |- Iniciar sesión, ir a la pestaña miembros, click nuevo miembro completar los campos y agregar un email, click en crear usuario, verificar aparición de ventana avisando del envío del correo de confirmación, remover invitacion, validar invitacion ya no existe|x|
 | |- Iniciar sesión, ir a la pestaña staff, click nuevo miembro completar los campos y agregar una descripción que sea mayor a 200 palabras, dar en crear usuario, deberá avisar sobre la posible falla.||
 | agregar staff sin correo|- Iniciar sesión, ir a la pestaña miembros, click invitar staff, completar los campos sin correo , click en invitar, deberá mostrar el error Email invalido| x|
 | *agregar staff sin nombre|- Iniciar sesión, ir a la pestaña miembros, click nuevo miembro completar los campos excepto el nombre , dar en crear usuario, deberá avisar sobre la posible falla.||
 |5. Modificar usuario |||
 |cambiar nombre |- iniciar sesión, navegar al detalle de un miembro, modificar nombre del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren | x |
-| modificar correo|- iniciar sesión, ir a la pestaña miembros, clic el usuario o miembro creado, modificar correo del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren ||
+| modificar correo|- iniciar sesión, ir a la pestaña miembros, clic el usuario o miembro creado, modificar correo del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren | x |
 |* modificar nota|- iniciar sesión, ir a la pestaña miembros, clic el usuario o miembro creado, modificar nota del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren| |
 |* modificar bio|- iniciar sesión, ir a la pestaña miembros, clic el usuario o miembro creado, modificar bio del usuario o miembro, clic en guardar y verificar que se los cambios se encuentren| |
 
