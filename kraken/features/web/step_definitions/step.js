@@ -2,6 +2,8 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const expect = require('chai').expect;
 
 Given, When('I go to page {kraken-string} {kraken-string}', async function (host, url) {
+    await new Promise(r => setTimeout(r, 5000))
+    console.log(">>>>>>>>>>>"+host+url);
     return await this.driver.url(host+url);
 });
 
@@ -164,7 +166,7 @@ When('I select tag with name {kraken-string}', async function (name) {
     return await tagOption.click();
 });
 
-When('I press settings button', async function (name) {
+When('I press settings button', async function () {
     let menuButton = await this.driver.$(".post-settings");
     await menuButton.click();
 });
@@ -175,6 +177,11 @@ When('I set url field to {kraken-string}', async function (url) {
     //post-setting-slug ember-text-field gh-input ember-view
 });
 
+Then('I check page full title with {kraken-string}', async function (title) {
+    await new Promise(r => setTimeout(r, 5000))
+    let titleItem = await this.driver.$(".//*//h1[text() = '" + title + "']");
+    return expect(await titleItem.isExisting()).to.be.true;
+});
 
 
 When('I close settings menu', async function () {
