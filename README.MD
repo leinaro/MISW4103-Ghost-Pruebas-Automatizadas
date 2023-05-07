@@ -45,8 +45,14 @@ Las funcionalidades a probar se escogieron de la lista de funcionalidades defini
 |eliminar published post con tag |- Crear tag, Crear un post con el tag creado, y publicar post, click en settings, click en delete post, confirmar delete, navegar a post publicados, validar que no existe el post eliminado.||
 |3. Editar Post|||
 |cambiar titulo y contenido de un post|- Iniciar sesión, crear post con nombre y una descripción, publicar post, verificar que el post se creará, entrar en el post creado, editar Post, cambiarle el título y la descripción, publicar post, navegar a post publicados, encontrar el post que se modificó, entrar  el post modificado, confirmar que los cambios se realizaron.| X |
+<<<<<<< Updated upstream
 |editar post cambiar atributos|- Iniciar sesión, ir a la pestaña de post, crear post con nombre y una descripción, publicar post, verificar que el post se creará, entrar en el post creado, editar Post, cambiarle el título y la descripción, publicar post, navegar a post publicados, encontrar el post que se modificó, entrar  el post modificado, confirmar que los cambios se realizaron.| |
 |editar post en draft |- Iniciar sesión, ir a la pestaña de post, crear post con nombre y una descripción, verificar que el post se creará, entrar en el post creado, editar Post, eliminar la descripción actualizar post, navegar a drafts de los post, encontrar el post que se modificó, entrar el el post modificado, confirmar que los cambios se realizaron.||
+=======
+|editar post cambiar atributos|- Iniciar sesión, ir a la pestaña de post, crear post con nombre y una descripción, publicar post, verificar que el post se creará, entrar en el post creado, editar Post, agregar un tag, publicar ir a lista de post con tags y validar que aparce.
+| x |
+|editar post en draft |- Iniciar sesión, ir a la pestaña de post, crear post con nombre y una descripción, publicar post, verificar que el post se creará, entrar en el post creado, editar Post, eliminar la descripción actualizar post, navegar a drafts de los post, encontrar el post que se modificó, entrar el el post modificado, confirmar que los cambios se realizaron.||
+>>>>>>> Stashed changes
 | |- Iniciar sesión, ir a la pestaña de post, crear post con nombre y una descripción, publicar post, verificar que el post se creará, entrar en el post creado, entrar en la pestaña de settings|
 |4. Agregar Usuario|||
 |agregar staff|- Iniciar sesión, ir a la pestaña staff, click invite staff agregar un correo y por último dar click en invitar, navegar a staff y verificar que se haya agregado correctamente. | x |

@@ -1,4 +1,4 @@
-Feature: Crear un nuevo post, publicarlo, y buscarlo en la lista de publicados
+Feature: Crear un nuevo post, publicarlo, y buscarlo en la lista de publicados, editar el titulo y el contenido
 
 @user1 @web
 Scenario: Como autor navego a un post, y  busco en publicados
