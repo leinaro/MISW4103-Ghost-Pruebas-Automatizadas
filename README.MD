@@ -4,12 +4,52 @@ En este repositorio podemos encontrar los scripts para ejecutar las pruebas end 
 
 En la carpeta Kraken del repositorio podemos encontrar la implementación de kraken, donde, los escenarios de prueba programados para las diferentes funcionalidades estan en la carpeta kraken/scenarios/.
 
+## Pre-requisitos
+Node v12.22.12 o v14.21.3
+
 ## Ejecutar pruebas con Kraken
 
-- Iniciar la version de GHOST 3.41.1 con node v12.22.12
-- Instalar la version de kraken ... con node ...
-- Ir a la carpeta kraken del repositorio cd Kraken 
-- Ejecutar las pruebas end to end con el comando npx kraken-node run
+- Instalar la version de GHOST 3.41.1
+```
+ghost uninstall
+ghost install 3.41.1 --local --force
+```
+- Abrir la url de Ghost que muestra al instalar `http://localhost:2368` y crear un usuario y contraseña
+
+- Instalar kraken
+```
+npm install kraken-node
+```
+- Instalar apium
+```
+npm install -g appium
+```
+- Instalar cucumber
+```
+npm install -g cucumber
+npm i @cucumber/cucumber@7.2.1
+npm install --save-dev chai
+```
+- Actualizar el archivo kraken/properties.json con los datos configurados en Ghost
+```
+{
+    "HOST": "http://localhost:2368/",
+    "USERNAME": "test@test.com",
+    "PASSWORD": "Test123456!"
+}
+```
+- Para ejecutar las pruebas debe ir a la carpeta kraken del repositorio 
+```
+cd Kraken
+```
+
+- Seleccione un escenario de pruebas de la carpeta kraken/scenarios y copiela a la carpeta kraken.
+
+
+- Ejecutar el escenaro seleccionado de las pruebas end to end 
+```
+npx kraken-node run
+```
 
 
 ## Escenarios de prueba 
