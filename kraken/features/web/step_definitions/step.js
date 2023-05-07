@@ -182,7 +182,7 @@ When('I create new tag with {kraken-string}', async function (name) {
     let elementTitle = await this.driver.$("#tag-name");
     await elementTitle.setValue(name);
     let saveButton = await this.driver.$(".gh-canvas-header > .view-actions > button");
-    await saveButton.click();
+    return await saveButton.click();
 });
 
 When('I select tag with name {kraken-string}', async function (name) {
@@ -225,7 +225,10 @@ When('I filter posts by tag with name {kraken-string}', async function (tag) {
 
 
 When('I click delete from settings', async function () {
-    let deleteButton = await this.driver.$("button.settings-menu-delete-button");
+    await new Promise(r => setTimeout(r, 5000))
+    let deleteButton = await this.driver.$("button.gh-btn.gh-btn-hover-red.gh-btn-icon.settings-menu-delete-button");
+    deleteButton.scrollIntoView();
+    await new Promise(r => setTimeout(r, 2000))
     return await deleteButton.click();
 });
 
@@ -236,6 +239,14 @@ When('I delete post', async function () {
 });
 
 When('I Click a post with title {kraken-string}', async function (title) {
+    await new Promise(r => setTimeout(r, 2000))
     let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + title + "']");
     return await postItem.click();
+});
+
+Then('I can not get page', async function () {
+    let errorCode = await this.driver.$(".error-code").getText();
+    await expect(errorCode).to.have.string("404");
+    let errorDescription = await this.driver.$(".error-description").getText();
+    return expect(errorDescription).to.have.string("not found");
 });
