@@ -95,6 +95,12 @@ Then('I validate the post with {kraken-string} exists', async function (name) {
     return expect(await postItem.isExisting()).to.be.true;
 });
 
+Then('I validate the post with {kraken-string} not exists', async function (name) {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + name + "']");
+    return expect(await postItem.isExisting()).to.not.be.true;
+});
+
 Then('I validate the draft post with {kraken-string} exists', async function (name) {
     await new Promise(r => setTimeout(r, 300))
     let postItem = await this.driver.$(".//*//h3[text() = '" + name + "']");
@@ -162,14 +168,13 @@ When('I select tag with name {kraken-string}', async function (name) {
 });
 
 When('I press settings button', async function () {
-    let menuButton = await this.driver.$(".post-settings");
-    await menuButton.click();
+    let menuButton = await this.driver.$("button.post-settings");
+    return await menuButton.click();
 });
 
 When('I set url field to {kraken-string}', async function (url) {
     let elementUser = await this.driver.$("#url");
-    await elementUser.setValue(url);
-    //post-setting-slug ember-text-field gh-input ember-view
+    return await elementUser.setValue(url);
 });
 
 Then('I check page full title with {kraken-string}', async function (title) {
@@ -189,4 +194,21 @@ When('I filter posts by tag with name {kraken-string}', async function (tag) {
     await elementTagsCombo.click();
     let elementTagOption = await this.driver.$(".//*//li[text() = '" + tag + "']");
     return await elementTagOption.click();
+});
+
+
+When('I click delete from settings', async function () {
+    let deleteButton = await this.driver.$("button.settings-menu-delete-button");
+    return await deleteButton.click();
+});
+
+When('I delete post', async function () {
+    await new Promise(r => setTimeout(r, 5000))
+    let spanButton = await this.driver.$("button.gh-btn-red");
+    return await spanButton.click();
+});
+
+When('I Click a post with title {kraken-string}', async function (title) {
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + title + "']");
+    return await postItem.click();
 });
