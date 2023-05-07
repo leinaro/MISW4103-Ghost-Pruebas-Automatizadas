@@ -15,7 +15,7 @@ Las funcionalidades a probar se escogieron de la lista de funcionalidades defini
 3. Editar Post 
 4. Agregar Usuario
 5. Modificar usuario 
-6. Eliminar usuario usuario 
+
 
 ### Casos de prueba
 
