@@ -30,6 +30,13 @@ When('I set post attributes title {kraken-string} and body {kraken-string}', asy
     return await elementContent.setValue(content);
 });
 
+When('I update post attributes title {kraken-string} and body {kraken-string}', async function (title, content) {
+    let elementTitle = await this.driver.$(".gh-editor-title");
+    await elementTitle.setValue(title);
+    let elementContent = await this.driver.$(".koenig-editor__editor.__mobiledoc-editor");
+    return await elementContent.setValue(content);
+});
+
 When('I click invite people', async function () {
     let elementInvitePeople = await this.driver.$("button.gh-btn.gh-btn-green");
     return await elementInvitePeople.click();
@@ -63,6 +70,26 @@ When('I update the user name to {kraken-string}', async function (newName) {
     await new Promise(r => setTimeout(r, 300))
     let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
     return await elementSave.click();
+});
+
+When('I click on view post from settings', async function () {
+    let settingsButton = await this.driver.$(".post-settings");
+    await settingsButton.click();
+    let viewPostLink = await this.driver.$("a.post-view-link");
+    return await viewPostLink.click();
+});
+
+Then('I validate the post publication with title {kraken-string} and content {kraken-string}', async function (title, content) {
+    let postTitle = await this.driver.$(".//*//header[contains(@class, 'post-full-header')]//*//h1[text() = '" + title + "']");
+    return expect(await postTitle.isExisting()).to.be.true;
+    //let postContent = await this.driver.$(".//*//section[contains(@class, 'post-full-content')]//*//p[text() = '" + content + "']");
+    //return expect(await postContent.isExisting()).to.be.true;
+    console.log(content)
+    let postContent = await this.driver.$(".post-full-content > .post-content").getText();
+    console.log(postContent)
+
+    return expect(postContent).startsWith(content);
+
 });
 
 Then('I validate the post with {kraken-string} exists', async function (name) {
