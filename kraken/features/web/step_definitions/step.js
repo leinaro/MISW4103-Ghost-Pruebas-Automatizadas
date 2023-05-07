@@ -51,6 +51,19 @@ When('I publish the post', async function () {
  
 });
 
+When('I navigate to user {kraken-string} details', async function (name) {
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + name + "']");
+    return await userItem.click();
+});
+
+When('I update the user name to {kraken-string}', async function (newName) {
+    let userName = await this.driver.$("#user-name");
+    await userName.setValue(newName);
+    await new Promise(r => setTimeout(r, 300))
+    let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
+    return await elementSave.click();
+});
+
 Then('I validate the post with {kraken-string} exists', async function (name) {
     let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + name + "']");
     return expect(await postItem.isExisting()).to.be.true;
