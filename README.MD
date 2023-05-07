@@ -8,7 +8,8 @@
 
 ## Escenarios de prueba 
 ### Funcionalidades
-Las funcionalidades a probar se escogieron de la lista de funcionalidades definida (aquí)[https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/wiki/Listado-de-funcionalidades]
+Las funcionalidades a probar se escogieron de la lista de funcionalidades definida 
+(aquí)[https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/wiki/Listado-de-funcionalidades]
 
 1. Crear Post 
 2. Eliminar Post
@@ -33,11 +34,6 @@ Las funcionalidades a probar se escogieron de la lista de funcionalidades defini
 - Crear un post y programar publicación, navegar a schedule, seleccionar el post en schedule, click en en settings, click en delete post, confirmar delete, navegar a post schedule, validar que no existe el post eliminado.
 - Crear un post, click en en settings, click en delete post, confirmar delete, navegar a post draft, validar que no existe el post eliminado.
 - Crear un post y publicar post, click en settings, click en delete post, confirmar delete, navegar a post publicados, validar que no existe el post eliminado.
-
-3. Editar Post
-- Iniciar sesión, ir a la pestaña de post, crear post con nombre y una descripción, publicar post, verificar que el post se creará, entrar en el post creado, editar Post, cambiarle el título y la descripción publicar post, navegar a post publicados, encontrar el post que se modificó, entrar el el post modificado, confirmar que los cambios se realizaron. 
-- Iniciar sesión, ir a la pestaña de post, crear post con nombre y una descripción, publicar post, verificar que el post se creará, entrar en el post creado, editar Post, eliminar la descripción publicar post, navegar a drafts de los post, encontrar el post que se modificó, entrar el el post modificado, confirmar que los cambios se realizaron.
-- Iniciar sesión, ir a la pestaña de post, crear post con nombre y una descripción, publicar post, verificar que el post se creará, entrar en el post creado, entrar en la pestaña de settings,
 
 3. Editar Post
 - Iniciar sesión, ir a la pestaña de post, crear post con nombre y una descripción, publicar post, verificar que el post se creará, entrar en el post creado, editar Post, cambiarle el título y la descripción publicar post, navegar a post publicados, encontrar el post que se modificó, entrar el el post modificado, confirmar que los cambios se realizaron. 
