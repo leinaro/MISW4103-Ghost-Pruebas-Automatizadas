@@ -82,15 +82,10 @@ When('I click on view post from settings', async function () {
 });
 
 Then('I validate the post publication with title {kraken-string} and content {kraken-string}', async function (title, content) {
-    let postTitle = await this.driver.$(".//*//header[contains(@class, 'post-full-header')]//*//h1[text() = '" + title + "']");
-    return expect(await postTitle.isExisting()).to.be.true;
-    //let postContent = await this.driver.$(".//*//section[contains(@class, 'post-full-content')]//*//p[text() = '" + content + "']");
-    //return expect(await postContent.isExisting()).to.be.true;
-    console.log(content)
+    let postTitle = await this.driver.$(".//*//h1[text() = '" + title + "']");
+    expect(await postTitle.isExisting()).to.be.true;
     let postContent = await this.driver.$(".post-full-content > .post-content").getText();
-    console.log(postContent)
-
-    return expect(postContent).startsWith(content);
+    return expect(postContent).to.have.string(content);
 
 });
 
