@@ -39,8 +39,8 @@ Las funcionalidades a probar se escogieron de la lista de funcionalidades defini
 |crear post agregar url  |- Iniciar sesion, hacer click en el tab Posts de la barra lateral, hacer click en el boton new post del contenido, agregar titulo, agregar contenido lorem ipsum, click en settings, agregar url, hacer click en publicar,  Navegar a la lista publicados (http://localhost:3001/ghost/#/posts?type=published) y validar que el nuevo post se creo. navegar a la nueva url y validar que es la nueva url.|x|
 |2. Eliminar Post|||
 |eliminar post publicado|- Crear un post y publicar post, navegar a publicados, seleccionar el post creado, click en settings, click en delete post, confirmar delete, navegar a post publicados, validar que no existe el post eliminado.|x|
-|eliminar post en draft |- Crear un post y guardar draft, navegar a draft, seleccionar el post en draft, click en en settings, click en delete post, confirmar delete, navegar a post draft, validar que no existe el post eliminado.||
-| eliminar post en schedule|- Crear un post y programar publicación, navegar a schedule, seleccionar el post en schedule, click en en settings, click en delete post, confirmar delete, navegar a post schedule, validar que no existe el post eliminado.||
+|eliminar post en draft |- Crear un post y guardar draft, navegar a draft, seleccionar el post en draft, click en en settings, click en delete post, confirmar delete, navegar a post draft, validar que no existe el post eliminado.|x|
+| eliminar post en schedule|- Crear un post y programar publicación, navegar a schedule, seleccionar el post en schedule, click en en settings, click en delete post, confirmar delete, navegar a post schedule, validar que no existe el post eliminado.|x|
 |eliminar post con url |- Crear un post, click en en settings, click en delete post, confirmar delete, navegar a post draft, validar que no existe el post eliminado.||
 |eliminar post con tag |- Crear un post y publicar post, click en settings, agregar tag, click en delete post, confirmar delete, navegar a post publicados, validar que no existe el post eliminado.||
 |3. Editar Post|||
