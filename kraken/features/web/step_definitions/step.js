@@ -16,6 +16,7 @@ When('I sign in with {kraken-string} and {kraken-string}', async function (user,
 });
 
 When('I click new post', async function () {
+    await new Promise(r => setTimeout(r, 300))
     let elementNewPost = await this.driver.$(".gh-nav-new-post");
     return await elementNewPost.click();
 });
@@ -65,10 +66,22 @@ When('I update the user name to {kraken-string}', async function (newName) {
 });
 
 Then('I validate the post with {kraken-string} exists', async function (name) {
+    await new Promise(r => setTimeout(r, 300))
     let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + name + "']");
     return expect(await postItem.isExisting()).to.be.true;
 });
 
+Then('I validate the draft post with {kraken-string} exists', async function (name) {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//h3[text() = '" + name + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the schedule post with {kraken-string} exists', async function (name) {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//h3[text() = '" + name + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
 
 Then('I validate the user {kraken-string} exists', async function (email) {
     await new Promise(r => setTimeout(r, 1000))
@@ -88,4 +101,63 @@ Then('I validate invalid email error is visible', async function () {
 Then('I validate error banner is visible', async function () {
     let errorBanner = await this.driver.$("#ember257");
     return expect(await errorBanner.isExisting()).to.be.true;
+});
+
+When('I go to draft posts', async function () {
+    let elementPostsButton = await this.driver.$("a[href='#/posts/?type=draft']");
+    return await elementPostsButton.click();
+});
+
+
+When('I select schedule post', async function () {
+    let publishDropdown = await this.driver.$(".ember-basic-dropdown-trigger");
+    await publishDropdown.click();
+    let unpublishRadio = await this.driver.$(".//*//div[contains(@class, 'gh-publishmenu-radio')]//*//div[text() = 'Schedule it for later']");
+    await unpublishRadio.click();
+    let publishButton = await this.driver.$(".gh-publishmenu-footer > .gh-publishmenu-button");
+    return await publishButton.click();
+
+});
+
+When('I create new tag with {kraken-string}', async function (name) {
+    let elementNewTag = await this.driver.$("a[href='#/tags/new/']");
+    await elementNewTag.click();
+    let elementTitle = await this.driver.$("#tag-name");
+    await elementTitle.setValue(name);
+    let saveButton = await this.driver.$(".gh-canvas-header > .view-actions > button");
+    await saveButton.click();
+});
+
+When('I select tag with name {kraken-string}', async function (name) {
+    let menuButton = await this.driver.$(".post-settings");
+    await menuButton.click();
+    let tagCombo = await this.driver.$("#tag-input > ul > input.ember-power-select-trigger-multiple-input");
+    await tagCombo.setValue(name);
+    let tagOption = await this.driver.$(".//*//li[text() = '" + name + "']");
+    return await tagOption.click();
+});
+
+When('I press settings button', async function (name) {
+    let menuButton = await this.driver.$(".post-settings");
+    await menuButton.click();
+});
+
+When('I set url field to {kraken-string}', async function (url) {
+    let elementUser = await this.driver.$("#url");
+    await elementUser.setValue(url);
+    //post-setting-slug ember-text-field gh-input ember-view
+});
+
+
+
+When('I close settings menu', async function () {
+	let elementCloseSettings = await this.driver.$(".settings-menu-header-action");
+    return await elementCloseSettings.click();
+});
+
+When('I filter posts by tag with name {kraken-string}', async function (tag) {
+    let elementTagsCombo = await this.driver.$(".gh-contentfilter-tag > div > .ember-power-select-selected-item");
+    await elementTagsCombo.click();
+    let elementTagOption = await this.driver.$(".//*//li[text() = '" + tag + "']");
+    return await elementTagOption.click();
 });
