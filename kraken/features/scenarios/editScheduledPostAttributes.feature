@@ -1,7 +1,8 @@
-Feature: Crear un nuevo post, publicarlo, buscarlo en la lista de publicados, ir al detalle del post, agregar un tag, publicar ir a lista de post con tags y validar que aparce.
+Feature: Crear un nuevo scheduled post, buscarlo en la lista de schedule, ir al detalle del post,
+modificarlo, darle reschedule buscarlo por el nuevo titulo
 
 @user1 @web
-Scenario: Como autor navego a un post, y  busco en publicados
+Scenario: Como autor creo un scheduled post, y  busco en publicados
     Given I go to page "<HOST>" "ghost/#/signin"
     And I sign in with "<USERNAME>" and "<PASSWORD>"
     When I click new post

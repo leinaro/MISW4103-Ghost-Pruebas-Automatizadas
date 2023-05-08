@@ -1,7 +1,7 @@
-Feature: Crear un nuevo post, publicarlo, buscarlo en la lista de publicados, ir al detalle del post, agregar un tag, publicar ir a lista de post con tags y validar que aparce.
+Feature: Crear un nuevo post en draft, buscarlo en la lista de draft, modificarlo,y validar la modificacion
 
 @user1 @web
-Scenario: Como autor navego a un post, y  busco en publicados
+Scenario: Como autor creo un post en draft, lo modificao y valido las modificaciones
     Given I go to page "<HOST>" "ghost/#/signin"
     And I sign in with "<USERNAME>" and "<PASSWORD>" 
     And I click new post

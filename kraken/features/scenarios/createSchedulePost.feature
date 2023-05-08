@@ -1,4 +1,4 @@
-Feature: Crear un nuevo post, dejarlo en draft, y buscarlo en la lista de draft
+Feature: Crear un nuevo post, dejarlo en schedule, y buscarlo en la lista de Schedule
 
 @user3 @web
 Scenario: Como autor creo un post en schedule, y lo busco en lista de schedule

@@ -1,7 +1,6 @@
-Feature: Crear un tag, Crear un nuevo post, agregarle el tag y publicarlo ,y buscarlo en la lista de publicados
-
+Feature: Crear un nuevo post, agregarle url y publicarlo,validar la url, eliminar el post y validar nuevamente la url
 @user1 @web
-Scenario: Como autor creo un post en schedule, y lo busco en la lista de shcedule, lo elimino y luego valido que no existe
+Scenario: Como autor creo un post con url, navego a la url, lo elimino y luego valido que no existe la pagina
     Given I go to page "<HOST>" "ghost/#/signin"
     And I sign in with "<USERNAME>" and "<PASSWORD>"
     When I click new post

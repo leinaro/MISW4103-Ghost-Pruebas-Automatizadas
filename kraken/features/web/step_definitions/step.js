@@ -1,4 +1,5 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
+const { assert } = require('chai');
 const expect = require('chai').expect;
 
 Given, When, Then('I go to page {kraken-string} {kraken-string}', async function (host, url) {
@@ -129,11 +130,11 @@ Then('I validate the user {kraken-string} exists', async function (email) {
 });
 
 Then('I validate the user email {kraken-string} exists', async function (email) {
-    await new Promise(r => setTimeout(r, 1000))
-    let userEmail = await this.driver.$("#user-email");
-    return expect(userEmail).to.have.string(email);
-    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + email + "']");
-    return expect(await userItem.isExisting()).to.be.true;
+    await new Promise(r => setTimeout(r, 3000))
+    let userEmail = await this.driver.$("#user-email").getValue();
+    await new Promise(r => setTimeout(r, 3000));
+    return expect( userEmail).to.be.equal(email);
+
 });
 
 When, Then('I revoke invitations', async function () {
@@ -235,9 +236,10 @@ When('I filter posts by tag with name {kraken-string}', async function (tag) {
 
 
 When('I click delete from settings', async function () {
-    await new Promise(r => setTimeout(r, 5000))
-    let deleteButton = await this.driver.$("button.gh-btn.gh-btn-hover-red.gh-btn-icon.settings-menu-delete-button");
+    await new Promise(r => setTimeout(r, 3000))
+    let deleteButton = await this.driver.$(".gh-btn.gh-btn-hover-red.gh-btn-icon.settings-menu-delete-button");
     deleteButton.scrollIntoView();
+    deleteButton.executeScript("window.scrollBy(0,-350)", "");
     await new Promise(r => setTimeout(r, 2000))
     return await deleteButton.click();
 });

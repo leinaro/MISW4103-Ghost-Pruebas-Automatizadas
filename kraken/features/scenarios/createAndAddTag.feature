@@ -1,7 +1,7 @@
 Feature: Crear un tag, Crear un nuevo post, agregarle el tag y publicarlo ,y buscarlo en la lista de publicados
 
 @user1 @web
-Scenario: Como autor creo un post lo publico, y lo busco en publicados
+Scenario: Como autor creo un tag, y lo agrego a un post
     Given I go to page "<HOST>" "ghost/#/signin"
     And I sign in with "<USERNAME>" and "<PASSWORD>"
     And I go to page "<HOST>" "ghost/#/tags" 

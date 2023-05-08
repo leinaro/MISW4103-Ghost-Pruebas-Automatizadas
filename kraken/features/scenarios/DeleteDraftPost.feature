@@ -1,7 +1,7 @@
-Feature: Crear un tag, Crear un nuevo post, agregarle el tag y publicarlo ,y buscarlo en la lista de publicados
+Feature: Crear un Draft post, buscarlo en la lista de draft y eliminarlo
 
 @user1 @web
-Scenario: Como autor creo un post lo publico, y lo busco en publicados
+Scenario: Como autor creo un draft post, y lo busco en drafts y lo elimino
     Given I go to page "<HOST>" "ghost/#/signin"
     And I sign in with "<USERNAME>" and "<PASSWORD>"
     When I click new post

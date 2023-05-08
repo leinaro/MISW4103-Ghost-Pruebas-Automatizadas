@@ -1,7 +1,7 @@
-Feature: Crear un tag, Crear un nuevo post, agregarle el tag y publicarlo ,y buscarlo en la lista de publicados
+Feature: Crear un tag, Crear un nuevo post, agregarle el tag y publicarlo ,y eliminar el post y validar que ya no aparece al buscar por tag
 
 @user1 @web
-Scenario: Como autor creo un post en schedule, y lo busco en la lista de shcedule, lo elimino y luego valido que no existe
+Scenario: Como autor creo un tag, creo un post y le asigno el tag,elimino el post y valido que no aparece en filtro por tag
     Given I go to page "<HOST>" "ghost/#/signin"
     And I sign in with "<USERNAME>" and "<PASSWORD>"
     And I go to page "<HOST>" "ghost/#/tags" 
