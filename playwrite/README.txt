@@ -8,3 +8,14 @@ npm i @cucumber/cucumber -D
 npm i ts-node -D  
 Con respecto a los patrones el primero de pageObject-> Estos estan representados en los objetos de login page y principalpage, los cuales tienen la logica, para así abstraer aun más todo lo que es la logica, por otro lado se usaron en todo locators para tener buenas practicas.
 Mientras que el segundo patron lo hicimos, integrando playwright con cucumber
+
+Ahora para correr los test es necesario crear un usuario, una vez instale la aplicación el usuario tiene que tener los siguientes parametros:
+
+Site title: Pruebas site
+Full name: Erich Giusseppe
+Email address: eg.soto@uniandes.edu.co
+Password: Supermean_1
+
+Para ejecutar las primeras 11 pruebas, ejecute el comando:
+npm test
+Para ejecutar las otras 9 pruebas:
