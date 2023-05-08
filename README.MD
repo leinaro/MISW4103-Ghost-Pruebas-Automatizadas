@@ -1,5 +1,6 @@
 # Pruebas automatizadas ghost
 
+
 En este repositorio podemos encontrar los scripts para ejecutar las pruebas end to end de Ghost.
 
 En la carpeta Kraken del repositorio podemos encontrar la implementación de kraken, donde, los escenarios de prueba programados para las diferentes funcionalidades estan en la carpeta kraken/scenarios/.
