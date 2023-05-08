@@ -173,7 +173,7 @@ export class PrincipalPage{
     async post_setting(){
   //await this.page.getByRole('menuitem', { name: 'By playrightUser - a few seconds ago Published Go to Analytics' }).getByRole('link', { name: 'Go to Analytics' }).click();
  // await page.screenshot({path: '7.post'})
-  await this.page.getByRole('link', { name: 'Edit post' }).click();
+  //await this.page.getByRole('link', { name: 'Edit post' }).click();
  // await this.page.getByRole('button', { name: 'Settings' }).click();
   //await this.page.screenshot({path: '8.editPost.png'});
   await this.page.getByRole('button', { name: 'Settings' }).click(); 
