@@ -106,6 +106,77 @@ export class PrincipalPage{
         }
         await expect(found).toBe(false);
     }
-    
 
+    async edit_post_descripion(){
+      //  await this.page.getByRole('menuitem', { name: 'By Erich Giusseppe - a few seconds ago Published Go to Analytics' }).getByRole('link', { name: 'Go to Analytics' }).click({force: true});
+
+        //await this.page.getByRole('link', { name: 'Edit post' }).click();
+        //await this.page.getByPlaceholder('Post title').fill('Prueba creación post (editado)');
+        await this.page.locator('.koenig-editor__editor').fill('Esta es un prueba realizada con playright..! (editado)');
+        await this.page.screenshot({path: '7.editPost.png'})
+        await this.page.getByRole('button', { name: 'Update' }).click();
+       // console.log(browserType+'-----------Post editado    -------------------------------')
+    
+      await this.page.goto('http://localhost:2368/ghost/#/posts?type=published');
+      await this.page.getByRole('link', { name: 'Published', exact: true }).click();
+  
+    
+    }
+    
+    async edit_post(){
+        //  await this.page.getByRole('menuitem', { name: 'By Erich Giusseppe - a few seconds ago Published Go to Analytics' }).getByRole('link', { name: 'Go to Analytics' }).click({force: true});
+  
+          //await this.page.getByRole('link', { name: 'Edit post' }).click();
+          await this.page.getByPlaceholder('Post title').fill('Prueba creación  (editado)');
+          await this.page.locator('.koenig-editor__editor').fill('Esta es un prueba realizada con playright..!');
+          await this.page.screenshot({path: '7.editPost.png'})
+          await this.page.getByRole('button', { name: 'Update' }).click();
+         // console.log(browserType+'-----------Post editado    -------------------------------')
+      
+        await this.page.goto('http://localhost:2368/ghost/#/posts?type=published');
+        await this.page.getByRole('link', { name: 'Published', exact: true }).click();
+    
+      
+      }
+    
+    async edit_post_title(){
+        //  await this.page.getByRole('menuitem', { name: 'By Erich Giusseppe - a few seconds ago Published Go to Analytics' }).getByRole('link', { name: 'Go to Analytics' }).click({force: true});
+  
+          //await this.page.getByRole('link', { name: 'Edit post' }).click();
+          await this.page.getByPlaceholder('Post title').fill('Prueba creación post (editado)');
+          //await this.page.locator('.koenig-editor__editor').fill('Esta es un prueba realizada con playright..! (editado)');
+          await this.page.screenshot({path: '7.editPost.png'})
+          await this.page.getByRole('button', { name: 'Update' }).click();
+         // console.log(browserType+'-----------Post editado    -------------------------------')
+      
+        await this.page.goto('http://localhost:2368/ghost/#/posts?type=published');
+        await this.page.getByRole('link', { name: 'Published', exact: true }).click();
+    
+      
+      }
+    async post_draft(){
+
+        //await this.page.getByRole('menuitem', { name: 'By playrightUser - a few seconds ago Published Go to Analytics' }).getByRole('link', { name: 'Go to Analytics' }).click({force: true});
+        //await new Promise(r => setTimeout(r, 2000));
+      //  await this.page.getByRole('link', { name: 'Edit post' }).click();
+       // await this.page.screenshot({path: '7.editPost.png'})
+        await this.page.getByPlaceholder('Post title').fill('editado..');
+        await this.page.locator('.koenig-editor__editor').fill('editado');
+       
+        await this.page.getByRole('button', { name: 'Update' }).click();
+        //console.log(browserType+'-----------Post editado    -------------------------------')
+       // http://localhost:2369/ghost/#/posts?type=draft
+      await this.page.goto('http://localhost:2368/ghost/#/posts?type=draft');
+      await this.page.getByRole('link', { name: 'Drafts', exact: true }).click();
+    }
+
+    async post_setting(){
+  //await this.page.getByRole('menuitem', { name: 'By playrightUser - a few seconds ago Published Go to Analytics' }).getByRole('link', { name: 'Go to Analytics' }).click();
+ // await page.screenshot({path: '7.post'})
+  await this.page.getByRole('link', { name: 'Edit post' }).click();
+ // await this.page.getByRole('button', { name: 'Settings' }).click();
+  //await this.page.screenshot({path: '8.editPost.png'});
+  await this.page.getByRole('button', { name: 'Settings' }).click(); 
+  //await this.page.screenshot({path: '9.postSetting.png'}) 
+    }
 }
