@@ -8,6 +8,8 @@ En la carpeta Kraken del repositorio podemos encontrar la implementación de kra
 ## Pre-requisitos
 Node v12.22.12 o v14.21.3
 
+## Instalar Ghost
+[Instalacion ghost-Docker](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/wiki/Instalacion-Ghost-Con-Docker)
 ## Ejecutar pruebas con Kraken
 
 - Instalar la version de GHOST 3.41.1
