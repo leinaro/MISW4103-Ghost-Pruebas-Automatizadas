@@ -37,7 +37,7 @@ npm install --save-dev chai
 ```
 {
     "HOST": "http://localhost:2368/",
-    "USERNAME": "user@gmail.com",
+    "USERNAME": "test@test.com",
     "PASSWORD": "Test123456!"
 }
 ```
