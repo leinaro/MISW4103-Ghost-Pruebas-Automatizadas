@@ -1,5 +1,6 @@
 import { Page, expect } from "@playwright/test"
 
+
 export class PrincipalPage{
     page: Page
     constructor(page:Page){
@@ -155,28 +156,90 @@ export class PrincipalPage{
       
       }
     async post_draft(){
-
-        //await this.page.getByRole('menuitem', { name: 'By playrightUser - a few seconds ago Published Go to Analytics' }).getByRole('link', { name: 'Go to Analytics' }).click({force: true});
-        //await new Promise(r => setTimeout(r, 2000));
-      //  await this.page.getByRole('link', { name: 'Edit post' }).click();
-       // await this.page.screenshot({path: '7.editPost.png'})
         await this.page.getByPlaceholder('Post title').fill('editado..');
         await this.page.locator('.koenig-editor__editor').fill('editado');
-       
         await this.page.getByRole('button', { name: 'Update' }).click();
-        //console.log(browserType+'-----------Post editado    -------------------------------')
-       // http://localhost:2369/ghost/#/posts?type=draft
-      await this.page.goto('http://localhost:2368/ghost/#/posts?type=draft');
-      await this.page.getByRole('link', { name: 'Drafts', exact: true }).click();
+        await this.page.goto('http://localhost:2368/ghost/#/posts?type=draft');
+        await this.page.getByRole('link', { name: 'Drafts', exact: true }).click();
     }
 
     async post_setting(){
-  //await this.page.getByRole('menuitem', { name: 'By playrightUser - a few seconds ago Published Go to Analytics' }).getByRole('link', { name: 'Go to Analytics' }).click();
- // await page.screenshot({path: '7.post'})
-  //await this.page.getByRole('link', { name: 'Edit post' }).click();
- // await this.page.getByRole('button', { name: 'Settings' }).click();
-  //await this.page.screenshot({path: '8.editPost.png'});
   await this.page.getByRole('button', { name: 'Settings' }).click(); 
-  //await this.page.screenshot({path: '9.postSetting.png'}) 
     }
+    async createNewMembers(username:string,usermail:string,nota:string){
+    
+        await this.page.goto('http://localhost:2368/ghost/#/members');
+        await this.page.getByRole('link', { name: 'New member' }).click();
+        await this.page.getByLabel('Name').fill(`${username}`);
+        //await this.page.getByLabel('Email').click();
+        await this.page.getByLabel('Email').fill(`${Math.random()+usermail}`);
+        await this.page.screenshot({path: '4.newMenber.png'});
+        await this.page.getByText('(not visible to member)').click();
+         await this.page.getByLabel('Note (not visible to member)').fill(`${nota}`);
+        await this.page.getByRole('button', { name: 'Save' }).click();
+        await this.page.screenshot({path: 'newMemberAdded.png'});
+           }
+
+           
+           
+           async editMembers(username:string,newusername:string){
+        
+            //await this.page.goto('http://localhost:2368/ghost/#/members');
+           //await this.page.getByRole('link', { name: 'New member' }).click();
+                //await new Promise(r => setTimeout(r, 3000));
+        //    await this.page.getByRole('link', { name: 'Members' }).click();
+        //     await this.page.getByLabel('Name').click();
+        //     await this.page.getByLabel('Name').press('CapsLock');
+            // await this.page.getByLabel('Name').fill(`${username}`);
+            // await this.page.getByLabel('Email').click();
+            await this.page.getByRole('link', { name: 'Members' }).click();
+            //await new Promise(r => setTimeout(r, 3000));
+           // await this.page.screenshot({path:'z0.png'});
+           await this.page.getByRole('link', { name: `${username}` }).click();
+            await this.page.screenshot({path:'z1.png'});
+            //await this.page.getByLabel('Name').click();
+            await this.page.getByLabel('Name').fill(`${newusername}`);
+            // await this.page.getByLabel('Email').fill(`${newusermail}`);
+            //await this.page.screenshot({path: '4.newMenber.png'});
+            await this.page.getByText('(not visible to member)').click();
+            await this.page.getByLabel('Note (not visible to member)').click();
+            await this.page.getByLabel('Note (not visible to member)').press('CapsLock');
+            //await this.page.getByLabel('Note (not visible to member)').fill(`${nota}`);
+            await this.page.screenshot({path:'Member.png'});
+         
+            await this.page.getByRole('button', { name: 'Save' }).click();
+            await this.page.screenshot({path:'z2.png'});
+               }
+
+               async editMailMembers(username:string,newmail:string){
+                await this.page.goto('http://localhost:2368/ghost/#/members');
+                //await this.page.getByRole('link', { name: 'New member' }).click();
+                     //await new Promise(r => setTimeout(r, 3000));
+             //    await this.page.getByRole('link', { name: 'Members' }).click();
+             //     await this.page.getByLabel('Name').click();
+             //     await this.page.getByLabel('Name').press('CapsLock');
+                 // await this.page.getByLabel('Name').fill(`${username}`);
+                 // await this.page.getByLabel('Email').click();
+                 //await this.page.getByRole('link', { name: 'Members' }).click();
+                 //await new Promise(r => setTimeout(r, 3000));
+                
+                await this.page.getByRole('link', { name: `${username}` }).click();
+                // await this.page.screenshot({path:'6.png'});
+                 //await this.page.getByLabel('Name').click();
+                // await this.page.getByLabel('Name').fill(`${newusername}`);
+                 // await this.page.getByLabel('Email').fill(`${newusermail}`);
+                 //await this.page.screenshot({path: '4.newMenber.png'});
+                // await this.page.getByLabel('Email').click();
+                 await this.page.screenshot({path:'7.png'});
+                 await this.page.getByLabel('Email').fill(`${newmail}`);
+                 await this.page.getByText('(not visible to member)').click();
+                 await this.page.getByLabel('Note (not visible to member)').click();
+                 await this.page.getByLabel('Note (not visible to member)').press('CapsLock');
+                 //await this.page.getByLabel('Note (not visible to member)').fill(`${nota}`);
+                // await this.page.screenshot({path:'Member.png'});
+              
+                 await this.page.getByRole('button', { name: 'Save' }).click();
+               }
+    
+
 }
