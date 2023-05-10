@@ -11,8 +11,10 @@ Given, When, Then('I go to page {kraken-string} {kraken-string}', async function
 When('I sign in with {kraken-string} and {kraken-string}', async function (user, pass) {
     let elementUser = await this.driver.$("#ember8");
     await elementUser.setValue(user);
+    console.log(">>>>>>>>>>>"+user);
     let elementPass = await this.driver.$("#ember10");
     await elementPass.setValue(pass);
+    console.log(">>>>>>>>>>>"+pass);
     await new Promise(r => setTimeout(r, 300))
     let elementLoginButton = await this.driver.$("#ember12");
     return await elementLoginButton.click();
@@ -201,6 +203,7 @@ When('I select tag with name {kraken-string}', async function (name) {
     await menuButton.click();
     let tagCombo = await this.driver.$("#tag-input > ul > input.ember-power-select-trigger-multiple-input");
     await tagCombo.setValue(name);
+    await new Promise(r => setTimeout(r, 3000))
     let tagOption = await this.driver.$(".//*//li[text() = '" + name + "']");
     return await tagOption.click();
 });
