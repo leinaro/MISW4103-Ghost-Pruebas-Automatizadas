@@ -14,7 +14,7 @@ yarn-error.log*
 lerna-debug.log*
 
 #reports
-*/reports/
+*/reports/*
 
 # OS
 .DS_Store

@@ -1,4 +1,4 @@
-const { After, Before, BeforeStep } = require('@cucumber/cucumber');
+const { After, Before, BeforeStep, AfterStep } = require('@cucumber/cucumber');
 const { WebClient } = require('kraken-node');
 var fs = require('fs');
 
@@ -15,32 +15,56 @@ After(async function() {
   await this.deviceClient.stopKrakenForUserId(this.userId);
 });
 
+/*
 BeforeStep(async function(scenario) {
-  //console.log(this);
-  let feature = scenario.pickle.uri.split('/').pop().split('.')[0];
-  let path = scenario.pickle.uri.split('/').pop().split('.')[0];
-  var nameArr = path.split('\\');
-  var str = nameArr[nameArr.length-1];
-  console.log("***************");
-  console.log(str);
-  console.log("***************");
- 
+  await new Promise(r => setTimeout(r, 2000));  
+  let featurePath = scenario.pickle.uri.split('\\');
+  var last = featurePath[featurePath.length-1];
+  let featureName = last.split('.')[0];
   
-  if (!fs.existsSync('./screenshots')) {
-    fs.mkdirSync('./screenshots/'+str, {
+  if (!fs.existsSync('../../screenshots')) {
+    fs.mkdirSync('../../screenshots/'+featureName, {
       recursive: true
     });
   }
 
-  if (!fs.existsSync('./screenshots/'+str )) {
-    fs.mkdirSync('./screenshots/'+str, {
+  if (!fs.existsSync('../../screenshots/'+featureName )) {
+    fs.mkdirSync('../../screenshots/'+featureName, {
       recursive: true
     });
   }
 
 
   stepCount += 1;
-  await this.driver.saveScreenshot('./screenshots/'  +str+'/'+ stepCount + '.png');
+  await this.driver.saveScreenshot('../../screenshots/'  +featureName+'/'+ stepCount + '.png');
+});
+*/
+
+AfterStep(async function(scenario) {
+  await new Promise(r => setTimeout(r, 2000));  
+  let featurePath = scenario.pickle.uri.split('\\');
+  var last = featurePath[featurePath.length-1];
+  let featureName = last.split('.')[0];
+
+  console.log("***********");
+  console.log(featurePath+"***********");
+  console.log("***********");
+  
+  if (!fs.existsSync('../../screenshots/4-44')) {
+    fs.mkdirSync('../../screenshots/4-44/'+featureName, {
+      recursive: true
+    });
+  }
+
+  if (!fs.existsSync('../../screenshots/4-44/'+featureName )) {
+    fs.mkdirSync('../../screenshots/4-44/'+featureName, {
+      recursive: true
+    });
+  }
+
+
+  stepCount += 1;
+  await this.driver.saveScreenshot('../../screenshots/4-44/'  +featureName+'/'+ stepCount + '.png');
 });
 
 
