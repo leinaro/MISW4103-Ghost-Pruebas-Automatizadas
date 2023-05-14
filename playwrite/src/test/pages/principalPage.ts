@@ -340,12 +340,9 @@ export class PrincipalPage3_42{
         await this.page.getByRole('button', { name: 'Settings' }).click();
         await this.page.locator('#tag-input input').click();
         await this.page.getByRole('option', { name: 'Getting Started' }).click();
-        await this.page.screenshot({ path: 'eeeeee.png' })
-        await this.page.screenshot({ path: 'oooooo.png' })
         await this.page.getByRole('button', { name: 'Close' }).click();
-        await this.page.screenshot({ path: 'a.png' })
         await this.page.getByRole('button', { name: 'Close' }).click();
-        await this.page.screenshot({ path: 'e.png' })
+
     }
     async user_confirms_tag_post(test_name:string){
         await this.page.getByRole('link', { name: `${test_name} By Erich Giusseppe • a few seconds ago` }).click({force: true});
@@ -368,9 +365,7 @@ export class PrincipalPage3_42{
     }
     async user_published_diferent(nombre:string){
         await this.page.waitForTimeout(4000);
-        await this.page.screenshot({ path: 'beforepost.png' });
         await this.page.goto("http://localhost:3001/ghost/#/posts?type=draft")
-        await this.page.screenshot({ path: 'in page.png' });
         await this.page.getByRole('link', { name: `${nombre} By Erich Giusseppe in Getting Started • a few seconds ago` }).click();
         await this.page.getByRole('button', { name: 'Publish' }).click();
         await this.page.getByRole('button', { name: 'Publish', exact: true }).click();
