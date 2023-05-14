@@ -54,6 +54,8 @@ cd Kraken
 npx kraken-node run
 ```
 
+## Ejecutar pruebas con Playwrite
+Las instrucciones para ejecutar las pruebas con Playwrite estan en el siguiente link -> (Playwrite)[https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/blob/main/playwrite/README.md]
 
 ## Escenarios de prueba 
 

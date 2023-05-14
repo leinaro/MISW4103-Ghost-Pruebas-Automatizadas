@@ -1,6 +1,8 @@
 # compiled output
 /dist
 /node_modules
+*/node_modules/*
+*/kraken/reports/*
 
 # Logs
 logs
@@ -12,7 +14,7 @@ yarn-error.log*
 lerna-debug.log*
 
 #reports
-*/reports/
+*/reports/*
 
 # OS
 .DS_Store
