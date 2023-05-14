@@ -15,31 +15,6 @@ After(async function() {
   await this.deviceClient.stopKrakenForUserId(this.userId);
 });
 
-/*
-BeforeStep(async function(scenario) {
-  await new Promise(r => setTimeout(r, 2000));  
-  let featurePath = scenario.pickle.uri.split('\\');
-  var last = featurePath[featurePath.length-1];
-  let featureName = last.split('.')[0];
-  
-  if (!fs.existsSync('../../screenshots')) {
-    fs.mkdirSync('../../screenshots/'+featureName, {
-      recursive: true
-    });
-  }
-
-  if (!fs.existsSync('../../screenshots/'+featureName )) {
-    fs.mkdirSync('../../screenshots/'+featureName, {
-      recursive: true
-    });
-  }
-
-
-  stepCount += 1;
-  await this.driver.saveScreenshot('../../screenshots/'  +featureName+'/'+ stepCount + '.png');
-});
-*/
-
 AfterStep(async function(scenario) {
   stepCount += 1;
 
@@ -52,12 +27,6 @@ AfterStep(async function(scenario) {
   console.log("*********** "+featurePath);
   console.log("*********** "+featureName);
   console.log("*********** "+stepCount);
-  
-  if (!fs.existsSync('../../screenshots')) {
-    fs.mkdirSync('../../screenshots/3-41/'+featureName, {
-      recursive: true
-    });
-  }
 
   if (!fs.existsSync('../../screenshots/3-41')) {
     fs.mkdirSync('../../screenshots/3-41/'+featureName, {
