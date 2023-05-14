@@ -42,22 +42,24 @@ BeforeStep(async function(scenario) {
 
 AfterStep(async function(scenario) {
   await new Promise(r => setTimeout(r, 2000));  
-  let featurePath = scenario.pickle.uri.split('\\');
+  let featurePath = scenario.pickle.uri.split('/');
   var last = featurePath[featurePath.length-1];
   let featureName = last.split('.')[0];
+  var filename = scenario.pickle.uri.substring(scenario.pickle.uri.lastIndexOf('/')+1);
 
-  console.log("***********");
-  console.log(featurePath+"***********");
-  console.log("***********");
+
+  console.log("*********** "+featurePath);
+  console.log("*********** "+featureName);
+  console.log("*********** "+filename);
   
-  if (!fs.existsSync('../../screenshots')) {
-    fs.mkdirSync('../../screenshots/'+featureName, {
+  if (!fs.existsSync('../../screenshots/3-41')) {
+    fs.mkdirSync('../../screenshots/3-41/'+featureName, {
       recursive: true
     });
   }
 
-  if (!fs.existsSync('../../screenshots/'+featureName )) {
-    fs.mkdirSync('../../screenshots/'+featureName, {
+  if (!fs.existsSync('../../screenshots/3-41/'+featureName )) {
+    fs.mkdirSync('../../screenshots/3-41/'+featureName, {
       recursive: true
     });
   }

@@ -42,7 +42,7 @@ BeforeStep(async function(scenario) {
 
 AfterStep(async function(scenario) {
   await new Promise(r => setTimeout(r, 2000));  
-  let featurePath = scenario.pickle.uri.split('\\');
+  let featurePath = scenario.pickle.uri.split('/');
   var last = featurePath[featurePath.length-1];
   let featureName = last.split('.')[0];
 
