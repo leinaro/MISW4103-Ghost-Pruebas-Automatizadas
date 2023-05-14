@@ -5,8 +5,6 @@ export const pageFixture = {
     //@ts-ignore
     page: undefined as Page,
     //@ts-ignore
-    page2:undefined as Page,
-    //@ts-ignore
     login_page:undefined as LoginPage,
     //@ts-ignore
     principal_page:undefined as PrincipalPage,

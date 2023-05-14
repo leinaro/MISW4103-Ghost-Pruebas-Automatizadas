@@ -6,7 +6,7 @@
 
         "paths":[
 
-            "src/test/features/Crear Post3_42.feature"
+            "src/test/features/Crear Post_3_42.feature"
             ],
         "publishQuiet":true,
         "dryRun":false,

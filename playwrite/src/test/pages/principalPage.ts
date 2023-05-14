@@ -15,16 +15,12 @@ export class PrincipalPage{
     }
     async publish_post(){
         await this.page.getByRole('button', { name: 'Publish' }).click();
-
         await this.page.getByRole('button', { name: 'Continue, final review →' }).click();
-        
         await this.page.getByRole('button', { name: 'Publish post, right now' , exact: false}).waitFor();
         await this.page.getByRole('button', { name: 'Publish post, right now' , exact: false}).click({force: true});
         await this.page.waitForTimeout(1000);
         await this.page.screenshot({ path: 'src/test/screenshots/post_published_new.png' });
        
-
-        
     }
     async user_fill_title_description(title:string,description:string){
         await this.page.getByPlaceholder('Post title').fill(title);
@@ -283,7 +279,6 @@ export class PrincipalPage3_42{
     }
     async user_goes_to_schedule(){
         await this.page.getByRole('link', { name: 'Posts' }).click();
-        await this.page.getByRole('button', { name: 'Leave' }).click();
         await this.page.getByRole('link', { name: 'Scheduled', exact: true }).click();
         await this.page.waitForTimeout(1000);
         await this.page.screenshot({ path: 'src/test/screenshots/post_Scheduled_old.png' });
@@ -320,7 +315,6 @@ export class PrincipalPage3_42{
     async user_fills_the_link(link:string){
         await this.page.getByRole('button', { name: 'Settings' }).click();
         await this.page.getByRole('button', { name: 'Meta data Extra content for search engines' }).click();
-        //await page.screenshot({ path: 'bbbbbbbbbb.png' });
         const inputLocator = this.page.locator('label:has-text("Canonical URL") + input');
         await inputLocator.fill(link);
         await this.page.getByRole('button', { name: 'Back' }).click();
@@ -345,7 +339,7 @@ export class PrincipalPage3_42{
 
     }
     async user_confirms_tag_post(test_name:string){
-        await this.page.getByRole('link', { name: `${test_name} By Erich Giusseppe • a few seconds ago` }).click({force: true});
+        await this.page.getByRole('link', { name: 'test_5 By Erich Giusseppe in Getting Started • a few seconds ago' }).click();
     }
     async delete_post(){
         await this.page.getByRole('button', { name: 'Settings' }).click();
@@ -370,7 +364,6 @@ export class PrincipalPage3_42{
         await this.page.getByRole('button', { name: 'Publish' }).click();
         await this.page.getByRole('button', { name: 'Publish', exact: true }).click();
         await this.page.waitForTimeout(1000);
-        await this.page.getByRole('link', { name: 'Posts' }).click();
     }
     async user_published_diferent_link(nombre:string){
         await this.page.waitForTimeout(4000);
@@ -379,7 +372,6 @@ export class PrincipalPage3_42{
         await this.page.getByRole('button', { name: 'Publish' }).click();
         await this.page.getByRole('button', { name: 'Publish', exact: true }).click();
         await this.page.waitForTimeout(1000);
-        await this.page.getByRole('link', { name: 'Posts' }).click();
     }
 
 }
