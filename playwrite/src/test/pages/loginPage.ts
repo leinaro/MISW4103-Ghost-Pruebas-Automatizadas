@@ -14,6 +14,8 @@ export class LoginPage{
     }
     async navigation(){
         await this.page.goto("http://localhost:2368/ghost/#/signin")
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/login_page_new.png' });
     }
         
     
@@ -41,6 +43,10 @@ export class LoginPage3_42{
     async navigation(){
 
         await this.page.goto("http://localhost:3001/ghost/#/signin")
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/login_page_old.png' });
+
+
         
     }
         

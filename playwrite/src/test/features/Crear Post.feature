@@ -2,6 +2,7 @@ Feature: Post autentication
 
   Background: 
     Given User navigates to the application
+  
   Scenario: Post must be created
     And User enter the username as "eg.soto@uniandes.edu.co" and password as "Supermean_1" and click the login button 
     And User goes to create a new post
@@ -32,7 +33,6 @@ Feature: Post autentication
     And User goes to published posts
     And User confirms published to have title as "test_4"
     And User confirms published to have the link as "http://localhost:2368/ghost/#/signin"
-
   Scenario: Post with tag must be created
     And User enter the username as "eg.soto@uniandes.edu.co" and password as "Supermean_1" and click the login button  
     And User goes to create a new post
@@ -41,6 +41,8 @@ Feature: Post autentication
     Then User publishes the post
     And User goes to published posts
     And User confirms published to have tag in post as "test_5"
+
+
 
 
 

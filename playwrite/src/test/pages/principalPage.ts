@@ -10,17 +10,18 @@ export class PrincipalPage{
 
         await this.page.getByRole('link', { name: 'Posts', exact: true }).click();
         await this.page.getByTitle('New post').click();
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/new_post_new.png' });
     }
     async publish_post(){
         await this.page.getByRole('button', { name: 'Publish' }).click();
 
-        await this.page.screenshot({ path: '1_1.png' });
         await this.page.getByRole('button', { name: 'Continue, final review →' }).click();
-
-        await this.page.screenshot({ path: '1_2.png' });
         
         await this.page.getByRole('button', { name: 'Publish post, right now' , exact: false}).waitFor();
         await this.page.getByRole('button', { name: 'Publish post, right now' , exact: false}).click({force: true});
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/post_published_new.png' });
        
 
         
@@ -33,18 +34,24 @@ export class PrincipalPage{
         await this.page.goto(link)
     }
     async user_goes_to_schedule(){
-        await this.page.getByRole('button', { name: 'Editor' }).click();
+        await this.page.getByRole('button', { name: 'Editor', exact: true }).click();
         await this.page.getByRole('link', { name: 'Posts' }).click();
         await this.page.getByRole('link', { name: 'Scheduled', exact: true }).click();
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/post_Scheduled_new.png' });
     }
     async user_goes_to_published(){
-        await this.page.getByRole('button', { name: 'Editor' }).click();
+        await this.page.getByRole('button', { name: 'Editor', exact: true }).click();
         await this.page.getByRole('link', { name: 'Posts' }).click();
         await this.page.getByRole('link', { name: 'Published', exact: true }).click();
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/post_published_new.png' });
     }
     async user_goes_to_draft(){
         await this.page.getByRole('link', { name: 'Posts' }).click();
         await this.page.getByRole('link', { name: 'Drafts', exact: true }).click();
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/post_Draft_new.png' });
     }
     async published_have_title(test_name:string){
         await this.page.getByRole('link', { name: `${test_name} By Erich Giusseppe - a few seconds ago Published` }).click({force: true});
@@ -61,7 +68,6 @@ export class PrincipalPage{
         await this.page.getByPlaceholder('YYYY-MM-DD').fill('3000-05-07');
         await this.page.getByRole('textbox').nth(2).fill('11:34');
         await this.page.getByRole('button', { name: 'Continue, final review →' }).click();
-        await this.page.screenshot({path:"screenshot.png"})
         await this.page.getByRole('button', { name: 'Publish post, on May 7th' }).waitFor();
         await this.page.getByRole('button', { name: 'Publish post, on May 7th' }).click({force: true});
     }
@@ -78,6 +84,7 @@ export class PrincipalPage{
     async user_confirms_link(link:string){
         await this.page.getByRole('button', { name: 'Settings' }).click();
         await this.page.getByRole('button', { name: 'Meta data' }).click();
+        await this.page.waitForTimeout(4000);
         const value= await this.page.locator('input[name="post-setting-canonicalUrl"]').inputValue();
         if(value !== link) {
             throw new Error(link);
@@ -115,7 +122,7 @@ export class PrincipalPage{
         //await this.page.getByRole('link', { name: 'Edit post' }).click();
         //await this.page.getByPlaceholder('Post title').fill('Prueba creación post (editado)');
         await this.page.locator('.koenig-editor__editor').fill('Esta es un prueba realizada con playright..! (editado)');
-        await this.page.screenshot({path: '7.editPost.png'})
+        await this.page.screenshot({path: 'src/test/screenshots/7.editPost.png'})
         await this.page.getByRole('button', { name: 'Update' }).click();
        // console.log(browserType+'-----------Post editado    -------------------------------')
     
@@ -131,7 +138,7 @@ export class PrincipalPage{
           //await this.page.getByRole('link', { name: 'Edit post' }).click();
           await this.page.getByPlaceholder('Post title').fill('Prueba creación  (editado)');
           await this.page.locator('.koenig-editor__editor').fill('Esta es un prueba realizada con playright..!');
-          await this.page.screenshot({path: '7.editPost.png'})
+          await this.page.screenshot({path: 'src/test/screenshots/7.editPost.png'})
           await this.page.getByRole('button', { name: 'Update' }).click();
          // console.log(browserType+'-----------Post editado    -------------------------------')
       
@@ -147,7 +154,7 @@ export class PrincipalPage{
           //await this.page.getByRole('link', { name: 'Edit post' }).click();
           await this.page.getByPlaceholder('Post title').fill('Prueba creación post (editado)');
           //await this.page.locator('.koenig-editor__editor').fill('Esta es un prueba realizada con playright..! (editado)');
-          await this.page.screenshot({path: '7.editPost.png'})
+          await this.page.screenshot({path: 'src/test/screenshots/7.editPost.png'})
           await this.page.getByRole('button', { name: 'Update' }).click();
          // console.log(browserType+'-----------Post editado    -------------------------------')
       
@@ -174,11 +181,11 @@ export class PrincipalPage{
         await this.page.getByLabel('Name').fill(`${username}`);
         //await this.page.getByLabel('Email').click();
         await this.page.getByLabel('Email').fill(`${Math.random()+usermail}`);
-        await this.page.screenshot({path: '4.newMenber.png'});
+        await this.page.screenshot({path: 'src/test/screenshots/4.newMenber.png'});
         await this.page.getByText('(not visible to member)').click();
          await this.page.getByLabel('Note (not visible to member)').fill(`${nota}`);
         await this.page.getByRole('button', { name: 'Save' }).click();
-        await this.page.screenshot({path: 'newMemberAdded.png'});
+        await this.page.screenshot({path: 'src/test/screenshots/newMemberAdded.png'});
            }
 
            
@@ -197,7 +204,7 @@ export class PrincipalPage{
             //await new Promise(r => setTimeout(r, 3000));
            // await this.page.screenshot({path:'z0.png'});
            await this.page.getByRole('link', { name: `${username}` }).click();
-            await this.page.screenshot({path:'z1.png'});
+            await this.page.screenshot({path:'src/test/screenshots/z1.png'});
             //await this.page.getByLabel('Name').click();
             await this.page.getByLabel('Name').fill(`${newusername}`);
             // await this.page.getByLabel('Email').fill(`${newusermail}`);
@@ -206,10 +213,10 @@ export class PrincipalPage{
             await this.page.getByLabel('Note (not visible to member)').click();
             await this.page.getByLabel('Note (not visible to member)').press('CapsLock');
             //await this.page.getByLabel('Note (not visible to member)').fill(`${nota}`);
-            await this.page.screenshot({path:'Member.png'});
+            await this.page.screenshot({path:'src/test/screenshots/Member.png'});
          
             await this.page.getByRole('button', { name: 'Save' }).click();
-            await this.page.screenshot({path:'z2.png'});
+            await this.page.screenshot({path:'src/test/screenshots/z2.png'});
                }
 
                async editMailMembers(username:string,newmail:string){
@@ -231,7 +238,7 @@ export class PrincipalPage{
                  // await this.page.getByLabel('Email').fill(`${newusermail}`);
                  //await this.page.screenshot({path: '4.newMenber.png'});
                 // await this.page.getByLabel('Email').click();
-                 await this.page.screenshot({path:'7.png'});
+                 await this.page.screenshot({path:'src/test/screenshots/7.png'});
                  await this.page.getByLabel('Email').fill(`${newmail}`);
                  await this.page.getByText('(not visible to member)').click();
                  await this.page.getByLabel('Note (not visible to member)').click();
@@ -252,11 +259,15 @@ export class PrincipalPage3_42{
     async go_create_new_post(){
 
         await this.page.getByRole('link', { name: 'New post' }).click();
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/new_post_old.png' });
     }
     async publish_post(){
 
         await this.page.getByRole('button', { name: 'Publish' }).click();
         await this.page.getByRole('button', { name: 'Publish', exact: true }).click();
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/post_published_old.png' });
 
       
     }
@@ -264,6 +275,7 @@ export class PrincipalPage3_42{
         await this.page.screenshot({ path: 'sett.png' })
         await this.page.getByPlaceholder('Post title').fill(title);
         await this.page.locator('.koenig-editor__editor').fill(description);
+        
         
     }
     async user_goes_to_link(link:string){
@@ -273,17 +285,23 @@ export class PrincipalPage3_42{
         await this.page.getByRole('link', { name: 'Posts' }).click();
         await this.page.getByRole('button', { name: 'Leave' }).click();
         await this.page.getByRole('link', { name: 'Scheduled', exact: true }).click();
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/post_Scheduled_old.png' });
     }
     async user_goes_to_published(){
         await this.page.getByRole('link', { name: 'Posts' }).click();
         await this.page.getByRole('button', { name: 'Leave' }).click();
         await this.page.screenshot({path:"aesfasfasefasef.png"})
         await this.page.getByTitle('Published').click();
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/post_published_old.png' });
         
     }
     async user_goes_to_draft(){
         await this.page.getByRole('link', { name: 'Posts' }).click();
         await this.page.getByRole('link', { name: 'Drafts', exact: true }).click();
+        await this.page.waitForTimeout(1000);
+        await this.page.screenshot({ path: 'src/test/screenshots/post_Draft_old.png' });
     }
     async published_have_title(test_name:string){
         await this.page.getByRole('link', { name: `${test_name} By Erich Giusseppe • a few seconds ago` }).click({force: true});
@@ -363,9 +381,7 @@ export class PrincipalPage3_42{
     }
     async user_published_diferent_link(nombre:string){
         await this.page.waitForTimeout(4000);
-        await this.page.screenshot({ path: 'beforepost.png' });
         await this.page.goto("http://localhost:3001/ghost/#/posts?type=draft")
-        await this.page.screenshot({ path: 'in page.png' });
         await this.page.getByRole('link', { name: `${nombre} By Erich Giusseppe • a few seconds ago` }).click();
         await this.page.getByRole('button', { name: 'Publish' }).click();
         await this.page.getByRole('button', { name: 'Publish', exact: true }).click();
