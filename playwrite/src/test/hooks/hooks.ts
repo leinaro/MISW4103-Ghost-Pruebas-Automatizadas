@@ -32,7 +32,7 @@ Before(async function(scenario){
 });
 AfterStep(async function(scenario) {
     console.log(scenario.pickle.name)
-    let featurePath = scenario.pickle.uri.split('/');
+    let featurePath = scenario.pickle.uri.split('\\');
     var last = featurePath[featurePath.length-1];
     let featureName = last.split('.')[0].split('_')[0];
     var filename = scenario.pickle.uri.substring(scenario.pickle.uri.lastIndexOf('/')+1);
