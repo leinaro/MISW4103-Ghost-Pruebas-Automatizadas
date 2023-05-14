@@ -41,17 +41,24 @@ BeforeStep(async function(scenario) {
 */
 
 AfterStep(async function(scenario) {
+  stepCount += 1;
+
   await new Promise(r => setTimeout(r, 2000));  
-  let featurePath = scenario.pickle.uri.split('/');
+  const path = require('path')
+  let featurePath = scenario.pickle.uri.split(path.sep);
   var last = featurePath[featurePath.length-1];
   let featureName = last.split('.')[0];
-  var filename = scenario.pickle.uri.substring(scenario.pickle.uri.lastIndexOf('/')+1);
-
 
   console.log("*********** "+featurePath);
   console.log("*********** "+featureName);
-  console.log("*********** "+filename);
+  console.log("*********** "+stepCount);
   
+  if (!fs.existsSync('../../screenshots')) {
+    fs.mkdirSync('../../screenshots/3-41/'+featureName, {
+      recursive: true
+    });
+  }
+
   if (!fs.existsSync('../../screenshots/3-41')) {
     fs.mkdirSync('../../screenshots/3-41/'+featureName, {
       recursive: true
@@ -65,8 +72,7 @@ AfterStep(async function(scenario) {
   }
 
 
-  stepCount += 1;
-  await this.driver.saveScreenshot('../../screenshots/'  +featureName+'/'+ stepCount + '.png');
+  await this.driver.saveScreenshot('../../screenshots/3-41/'+featureName+'/'+ stepCount + '.png');
 });
 
 

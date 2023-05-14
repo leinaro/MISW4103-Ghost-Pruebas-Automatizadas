@@ -41,14 +41,14 @@ BeforeStep(async function(scenario) {
 */
 
 AfterStep(async function(scenario) {
-  await new Promise(r => setTimeout(r, 2000));  
-  let featurePath = scenario.pickle.uri.split('/');
+  const path = require('path')
+  let featurePath = scenario.pickle.uri.split(path.sep);
   var last = featurePath[featurePath.length-1];
   let featureName = last.split('.')[0];
 
-  console.log("***********");
-  console.log(featurePath+"***********");
-  console.log("***********");
+
+  console.log("*********** "+featurePath);
+  console.log("*********** "+featureName);
   
   if (!fs.existsSync('../../screenshots/4-44')) {
     fs.mkdirSync('../../screenshots/4-44/'+featureName, {
