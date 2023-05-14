@@ -9,7 +9,7 @@
             "src/test/features/"
             ],
         "publishQuiet":true,
-        "dryRun":false,
+        "dryRun":true,
         "require":[
             "src/test/stepsv2/*.ts",
             "src/test/hooks/hooks.ts",
