@@ -290,8 +290,6 @@ export class PrincipalPage3_42{
     }
     async user_goes_to_published(){
         await this.page.getByRole('link', { name: 'Posts' }).click();
-        await this.page.getByRole('button', { name: 'Leave' }).click();
-        await this.page.screenshot({path:"aesfasfasefasef.png"})
         await this.page.getByTitle('Published').click();
         await this.page.waitForTimeout(1000);
         await this.page.screenshot({ path: 'src/test/screenshots/post_published_old.png' });
