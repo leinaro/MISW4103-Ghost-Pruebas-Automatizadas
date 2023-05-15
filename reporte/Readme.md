@@ -28,11 +28,22 @@ dentro de la carpeta **reporte** abra una consola de comandos y ejecute el sigui
 
 
 ## reporte generado.
-el reporte quedará ubicado en la siguiente ruta.[Results](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/tree/main/reporte/results)
-
-Dentro quedarán las carpetas con cada ejecución.
+el reporte quedará ubicado en la carpeta result, en donde encontrará una carpeta para cada ejecución.
+![results](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/assets/123895702/0fc2bd24-523f-4ecb-bfb5-8d4e6a65ce54)
 
 ## html
-si entra a una de las ejecuciones podrá encontrar el archivo html con el reporte.
+si entra a una de las ejecuciones podrá encontrar el archivo **report.html** que contiene el reporte.
+
+## ver la página principal
+![reporteMain](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/assets/123895702/dc48ecda-52aa-4eb2-912a-e64555b35464)
+
+### ver un step
+puede seleccionar un step y se mostraran las capturas y la comparación de las imágenes.
+![reporteStep](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/assets/123895702/eec3c6c4-6a75-4206-8a76-29db94ce3e85)
+
+
+
+
+
 
 
