@@ -27,5 +27,11 @@ dentro de la carpeta **reporte** abra una consola de comandos y ejecute el sigui
 
 
 ## reporte generado.
-el reporte quedará ubicado en la siguiente ruta.
-https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/tree/main/reporte/results
+el reporte quedará ubicado en la siguiente ruta.[Results](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/tree/main/reporte/results)
+
+Dentro quedarán las carpetas con cada ejecución.
+
+## html
+si entra a una de las ejecuciones podrá encontrar el archivo html con el reporte.
+
+
