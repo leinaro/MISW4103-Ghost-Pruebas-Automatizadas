@@ -57,6 +57,9 @@ npx kraken-node run
 ## Ejecutar pruebas con Playwrite
 Las instrucciones para ejecutar las pruebas con Playwrite estan en el siguiente link -> (Playwrite)[https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/blob/main/playwrite/README.md]
 
+## Pruebas de regresion visual
+https://uniandes-my.sharepoint.com/:v:/g/personal/ia_rojas2_uniandes_edu_co/EXn0HnbXGwtLu7HPaa2Zmg4By2-nEBETzP8T29UoOEqAPA?e=gasExK
+
 ## Escenarios de prueba 
 
 Los escenarios y casos de pruebas incluidos en cada herramienta se pueden ver en la siguiente lista de funcionalidades
