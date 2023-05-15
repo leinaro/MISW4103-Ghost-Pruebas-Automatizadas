@@ -77,9 +77,9 @@ AfterStep(async function(scenario) {
         await pageFixture.login_page_3_42.page.screenshot({ path: '../screenshots/'  +'3-42/'+featureName+'/'+ stepCount + '.png'});
     }
     
-    console.log("*********** "+featurePath);
-    console.log("*********** "+featureName);
-    console.log("*********** "+filename);
+    //console.log("*********** "+featurePath);
+    //console.log("*********** "+featureName);
+    //console.log("*********** "+filename);
   });
   After(async function ({pickle}){
     await pageFixture.page.close();
