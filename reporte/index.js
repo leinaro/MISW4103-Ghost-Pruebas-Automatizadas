@@ -103,7 +103,10 @@ function createReport(resInfo) {
   let playwriteFeatures = resInfo["playwrite"]
   console.log("playwriteFeatures "+playwriteFeatures)
 
-  let features = fs.readdirSync(config.screenshotsPath+"/"+config.versions.kraken.old).filter(function(x) {
+  let krakenFeaturesFiles = fs.readdirSync(config.screenshotsPath+"/"+config.versions.kraken.old).filter(function(x) {
+    return x !== '.DS_Store' && x !== 'ignore-other-file.js';
+  });
+  let playwriteFeaturesFiles = fs.readdirSync(config.screenshotsPath+"/"+config.versions.playwrite.old).filter(function(x) {
     return x !== '.DS_Store' && x !== 'ignore-other-file.js';
   });
 
@@ -119,27 +122,26 @@ function createReport(resInfo) {
           <h1>Reporte Semana 6</h1>
           <h2>Kraken</h2>
           <div class="accordion" id="accordionKraken">
-            ${features.reduce((accumulator, currentValue) => accumulator + feature(currentValue, krakenFeatures, "accordionKraken"),"")}
+            ${krakenFeaturesFiles.reduce((accumulator, currentValue) => accumulator + feature(currentValue, krakenFeatures, "accordionKraken", config.versions.kraken.old),"")}
           </div>
           <h2>Playwrite</h2>
           <div class="accordion" id="playwriteFeatures">
-            ${features.reduce((accumulator, currentValue) => accumulator + feature(currentValue, playwriteFeatures, "playwriteFeatures"),"")}
+            ${playwriteFeaturesFiles.reduce((accumulator, currentValue) => accumulator + feature(currentValue, playwriteFeatures, "playwriteFeatures", config.versions.playwrite.old),"")}
           </div>
         </div>
       </body>
     </html>`
 }
 
-function feature(f, info, id) {
+function feature(f, info, id, tool) {
   console.log("id "+id)
   console.log("f "+f)
   console.log("info "+info)
 
-  let screenshots = fs.readdirSync(`${config.screenshotsPath+"/"+config.versions.kraken.old}/${f}`).map(function (item) {
+  let screenshots = fs.readdirSync(`${config.screenshotsPath+"/"+tool}/${f}`).map(function (item) {
     let num = item.split('.')
     return parseInt(num, 10);
-  });
-  screenshots = screenshots.sort(sorter);
+  }).sort(sorter);
 
   return `
   <div class="accordion-item">
