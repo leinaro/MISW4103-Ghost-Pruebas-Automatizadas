@@ -24,6 +24,8 @@ export class LoginPage{
         await this.usernarname_box.fill(username)
         await this.password_box.fill(password)
         await this.login_button.click()
+
+        
     }
 
 }
@@ -57,5 +59,5 @@ export class LoginPage3_42{
         await this.password_box.fill(password)
         await this.login_button.click()
     }
-
+    
 }

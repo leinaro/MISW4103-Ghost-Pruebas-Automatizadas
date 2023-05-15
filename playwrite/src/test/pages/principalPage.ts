@@ -374,4 +374,50 @@ export class PrincipalPage3_42{
         await this.page.waitForTimeout(1000);
     }
 
+    async go_staft(){
+        await this.page.getByRole('link', { name: 'Staff' }).click();
+    }
+    async go_to_url_staft(){
+        await this.page.goto("http://localhost:3001/ghost/#/staff")
+    }
+   
+
+    async  invite(){
+        await this.page.getByRole('button', { name: 'Invite people' }).click();
+    }
+
+    
+    async  putMailAndRole(mail:string, role:string){
+        
+        await this.page.waitForTimeout(1000);
+         await this.page.getByPlaceholder('Email Address').fill(mail+Math.floor(Math.random() * 1000) + 1+'@gmail.com');
+         //await this.page.waitForTimeout(1000);
+         await this.page.getByRole('button', { name: 'Send invitation now' }).click();
+         await this.page.waitForTimeout(1000);
+    }
+
+    async  NoputMailAndRole(mail:string, role:string){
+        
+        await this.page.waitForTimeout(1000);
+         await this.page.getByPlaceholder('Email Address').fill("");
+         //await this.page.waitForTimeout(1000);
+         await this.page.getByRole('button', { name: 'Send invitation now' }).click();
+         await this.page.waitForTimeout(1000);
+    }
+
+    async  createMailAndRole(mail:string, role:string){
+        
+        await this.page.waitForTimeout(1000);
+         await this.page.getByPlaceholder('Email Address').fill(mail);
+         //await this.page.waitForTimeout(1000);
+         await this.page.getByRole('button', { name: 'Send invitation now' }).click();
+         await this.page.waitForTimeout(1000);
+    }
+
+    
+    async  revoke(){
+        await this.page.getByRole('link',{name:'REVOKE'}).filter({ hasText: 'ic Mario@gmail.com Invitation sent:a few seconds ago, expires in 7 days' });
+    }
+
+
 }
