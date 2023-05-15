@@ -15,10 +15,17 @@
 ## instalación
 dentro de la carpeta **reporte** abra una consola de comandos y ejecute el siguiente comando
 
-``
-
+`npm install`
 
 ## generar el reporte
 
 dentro de la carpeta **reporte** abra una consola de comandos y ejecute el siguiente comando
-``
+`node index.js`
+
+## generacion del reporte
+![Screen Shot 2023-05-14 at 10 20 23 PM](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/assets/123895702/e2bc3b35-dc42-4881-9fb8-bffe4cdf2e64)
+
+
+## reporte generado.
+el reporte quedará ubicado en la siguiente ruta.
+https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/tree/main/reporte/results
