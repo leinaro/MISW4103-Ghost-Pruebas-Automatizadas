@@ -1,7 +1,10 @@
 
-## prerequisitos 
+# Reporte pruebas de regreseión viusal.
+
+## Prerequisitos 
 
 *Haber ejecutado las pruebas  end to end con las dos herramientas del proyecto, kraken y playwrite.
+
 *Tener capturas en las carpetas.
 
 |3.41|4.44|3.42|5.47.0|
@@ -10,9 +13,12 @@
 
 
 ## instalación
-dentro de la carpeta **reporte** se debe ejecutar el comando
+dentro de la carpeta **reporte** abra una consola de comandos y ejecute el siguiente comando
+
+``
 
 
 ## generar el reporte
 
-dentro de la carpeta **reporte** se debe ejecutar el comando
+dentro de la carpeta **reporte** abra una consola de comandos y ejecute el siguiente comando
+``
