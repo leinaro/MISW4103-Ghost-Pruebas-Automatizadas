@@ -1,6 +1,5 @@
 # Pruebas automatizadas ghost
 
-
 En este repositorio podemos encontrar los scripts para ejecutar las pruebas end to end de Ghost.
 
 En la carpeta Kraken del repositorio podemos encontrar la implementación de kraken, donde, los escenarios de prueba programados para las diferentes funcionalidades estan en la carpeta kraken/scenarios/.
@@ -10,14 +9,10 @@ Node v12.22.12 o v14.21.3
 
 ## Instalar Ghost
 [Instalacion ghost-Docker](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/wiki/Instalacion-Ghost-Con-Docker)
+
 ## Ejecutar pruebas con Kraken
 
-- Instalar la version de GHOST 3.41.1
-```
-ghost uninstall
-ghost install 3.41.1 --local --force
-```
-- Abrir la url de Ghost que muestra al instalar `http://localhost:2368` y crear un usuario y contraseña
+- Este proyecto contiene dos proyectos de kraken configurados para dos versiones diferentes de Ghost `kraken/3.41/` y `kraken/4.44`, para ejecutar las pruebas de cada version debe haber completado la instalación de Ghost para las dos versiones y haber creado los usuarios con correo "test@test.com" y contraseña "Test123456!".
 
 - Instalar kraken
 ```
@@ -33,7 +28,7 @@ npm install -g cucumber
 npm i @cucumber/cucumber@7.2.1
 npm install --save-dev chai
 ```
-- Actualizar el archivo kraken/properties.json con los datos configurados en Ghost
+- Cada proyecto Actualizar el archivo kraken/properties.json con los datos configurados en Ghost
 ```
 {
     "HOST": "http://localhost:2368/",
