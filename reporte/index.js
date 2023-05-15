@@ -125,8 +125,8 @@ function createReport(resInfo) {
             ${krakenFeaturesFiles.reduce((accumulator, currentValue) => accumulator + feature(currentValue, krakenFeatures, "accordionKraken", config.versions.kraken.old),"")}
           </div>
           <h2>Playwrite</h2>
-          <div class="accordion" id="playwriteFeatures">
-            ${playwriteFeaturesFiles.reduce((accumulator, currentValue) => accumulator + feature(currentValue, playwriteFeatures, "playwriteFeatures", config.versions.playwrite.old),"")}
+          <div class="accordion" id="accordionPlaywrite">
+            ${playwriteFeaturesFiles.reduce((accumulator, currentValue) => accumulator + feature(currentValue, playwriteFeatures, "accordionPlaywrite", config.versions.playwrite.old),"")}
           </div>
         </div>
       </body>
@@ -145,35 +145,35 @@ function feature(f, info, id, tool) {
 
   return `
   <div class="accordion-item">
-    <h2 class="accordion-header" id="heading${id}${f}">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${id}${f}" aria-expanded="true" aria-controls="collapse${id}${f}">
+    <h2 class="accordion-header" id="heading${id}${f.replace(/\s/g, '')}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${id}${f.replace(/\s/g, '')}" aria-expanded="true" aria-controls="collapse${id}${f.replace(/\s/g, '')}">
         Feature: ${f}
       </button>
     </h2>
-    <div id="collapse${id}${f}" class="accordion-collapse collapse" aria-labelledby="heading${id}${f}" data-bs-parent="#${id}">
+    <div id="collapse${id}${f.replace(/\s/g, '')}" class="accordion-collapse collapse" aria-labelledby="heading${id}${f.replace(/\s/g, '')}" data-bs-parent="#${id}">
       <div class="accordion-body">
         ${
-          screenshots.reduce((accumulator, s) => accumulator + step(f, s, info), "")
+          screenshots.reduce((accumulator, s) => accumulator + step(f, s, info, id), "")
         }
       </div>
     </div>
   </div>`
 }
 
-function step(f, s, info) {
+function step(f, s, info, id) {
   console.log(info)
 
   filterInfo = info[`${f}-${s}`]
 
   return `
-  <div class="accordion" id="accordionStep">
+  <div class="accordion" id="accordionStep${id}">
     <div class="accordion-item">
-      <h2 class="accordion-header" id="heading${s}">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${s}" aria-expanded="true" aria-controls="collapse${s}">
+      <h2 class="accordion-header" id="heading${s}${id}">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${s}${id}" aria-expanded="true" aria-controls="collapse${s}${id}">
           Step: ${s}
         </button>
       </h2>
-      <div id="collapse${s}" class="accordion-collapse collapse" aria-labelledby="heading${s}" data-bs-parent="#accordionStep">
+      <div id="collapse${s}${id}" class="accordion-collapse collapse" aria-labelledby="heading${s}${id}" data-bs-parent="#accordionStep${id}">
         <div class="accordion-body">
           <table class="table">
             <thead class="thead-dark">
@@ -193,8 +193,8 @@ function step(f, s, info) {
           <table class="table-responsive table-bordered">
             <thead>
               <tr>
-                <th scope="col">Ghost 3.41</th>
-                <th scope="col">Ghost 4.44</th>
+                <th scope="col">Ghost Old</th>
+                <th scope="col">Ghost New</th>
                 <th scope="col">Resultado</th>
               </tr>
             </thead>
