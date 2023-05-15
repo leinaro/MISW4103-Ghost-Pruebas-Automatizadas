@@ -20,6 +20,7 @@ dentro de la carpeta **reporte** abra una consola de comandos y ejecute el sigui
 ## generar el reporte
 
 dentro de la carpeta **reporte** abra una consola de comandos y ejecute el siguiente comando
+
 `node index.js`
 
 ## generacion del reporte
