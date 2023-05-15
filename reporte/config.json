@@ -1,6 +1,15 @@
 {
-    "v3Directory": "../screenshots/3-41",
-    "v4Directory": "../screenshots/4-44",
+    "screenshotsPath": "../screenshots",
+    "versions": {
+        "kraken": {
+            "old": "3-41",
+            "new" : "4-44"
+        },
+        "playwrite": {
+            "old": "3-42",
+            "new" : "5-47"
+        }
+    },
     "options":{
         "output": {
             "errorColor": {

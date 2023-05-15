@@ -2,20 +2,41 @@ const compareImages = require("resemblejs/compareImages")
 const config = require("./config.json");
 const fs = require('fs');
 
-const { v3Directory, v4Directory, options } = config;
+const {options} = config
+let resultInfo = {}
+
+let datetime = new Date().toISOString().replace(/:/g, ".");
 
 async function run() {
-  let resultInfo = {}
-  let datetime = new Date().toISOString().replace(/:/g, ".");
 
-  let features = fs.readdirSync(v3Directory).filter(function(x) {
+  // Comparing kraken screenshots
+  let krakenOldScreenShotsPath = config.screenshotsPath+"/"+config.versions.kraken.old;
+  let krakenNewScreenShotsPath = config.screenshotsPath+"/"+config.versions.kraken.new;
+  resultInfo["kraken"] = await compareVersions(krakenOldScreenShotsPath,krakenNewScreenShotsPath)
+
+  // Comparing playwrite screenshots
+  let playwriteOldScreenShotsPath = config.screenshotsPath+"/"+config.versions.playwrite.old;
+  let playwriteNewScreenShotsPath = config.screenshotsPath+"/"+config.versions.playwrite.new;
+  resultInfo["playwrite"] = await compareVersions(playwriteOldScreenShotsPath,playwriteNewScreenShotsPath)
+  
+  fs.writeFileSync(`./results/${datetime}/report.html`, createReport(resultInfo));
+  fs.copyFileSync('./index.css', `./results/${datetime}/index.css`);
+
+  return resultInfo;
+}
+(async () => console.log(await run()))();
+
+async function compareVersions(oldVersionPath, newVersionPath){
+  let resultInfo = {}
+
+  let features = fs.readdirSync(oldVersionPath).filter(function(x) {
     return x !== '.DS_Store' && x !== 'ignore-other-file.js';
   });
 
   for (let index = 0; index < features.length; index++) {
     const feature = features[index];
 
-    let screenshots = fs.readdirSync(`${v3Directory}/${feature}`)
+    let screenshots = fs.readdirSync(`${oldVersionPath}/${feature}`)
       .map(function (item) {
         let num = item.split('.')
         return parseInt(num, 10);
@@ -26,14 +47,12 @@ async function run() {
       const step = screenshots[j];
 
       const data = await compareImages(
-        fs.readFileSync(`${v3Directory}/${feature}/${step}.png`),
-        fs.readFileSync(`${v4Directory}/${feature}/${step}.png`),
+        fs.readFileSync(`${oldVersionPath}/${feature}/${step}.png`),
+        fs.readFileSync(`${newVersionPath}/${feature}/${step}.png`),
         options
       );
 
-      console.log(data);
-
-      resultInfo[`${feature}-${step}`] = {
+      let results = {
         isSameDimensions: data.isSameDimensions,
         dimensionDifference: data.dimensionDifference,
         rawMisMatchPercentage: data.rawMisMatchPercentage,
@@ -41,6 +60,11 @@ async function run() {
         diffBounds: data.diffBounds,
         analysisTime: data.analysisTime
       }
+
+      console.log(`${feature}-${step}`)
+      console.log(results)
+
+      resultInfo[`${feature}-${step}`] = results
 
       if (!fs.existsSync('./results')) {
         fs.mkdirSync('./results', {
@@ -66,19 +90,20 @@ async function run() {
           recursive: true
         });
       }
-      fs.copyFileSync(`${v3Directory}/${feature}/${step}.png`, `./results/${datetime}/${feature}/v3-${step}.png`);
-      fs.copyFileSync(`${v4Directory}/${feature}/${step}.png`, `./results/${datetime}/${feature}/v4-${step}.png`);
+      fs.copyFileSync(`${oldVersionPath}/${feature}/${step}.png`, `./results/${datetime}/${feature}/old-${step}.png`);
+      fs.copyFileSync(`${newVersionPath}/${feature}/${step}.png`, `./results/${datetime}/${feature}/new-${step}.png`);
     };
   };
-  fs.writeFileSync(`./results/${datetime}/report.html`, createReport(resultInfo));
-  fs.copyFileSync('./index.css', `./results/${datetime}/index.css`);
-
   return resultInfo;
 }
-(async () => console.log(await run()))();
 
 function createReport(resInfo) {
-  let features = fs.readdirSync(v3Directory).filter(function(x) {
+  let krakenFeatures = resInfo["kraken"]
+  console.log("krakenFeatures "+krakenFeatures)
+  let playwriteFeatures = resInfo["playwrite"]
+  console.log("playwriteFeatures "+playwriteFeatures)
+
+  let features = fs.readdirSync(config.screenshotsPath+"/"+config.versions.kraken.old).filter(function(x) {
     return x !== '.DS_Store' && x !== 'ignore-other-file.js';
   });
 
@@ -90,32 +115,40 @@ function createReport(resInfo) {
       </head>
       <body>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-        <h1>Reporte Semana 6</h1>
         <div class="container-fluid">
-          <div class="accordion" id="accordionExample">
-            ${features.map(b => feature(b, resInfo))}
+          <h1>Reporte Semana 6</h1>
+          <h2>Kraken</h2>
+          <div class="accordion" id="accordionKraken">
+            ${features.reduce((accumulator, currentValue) => accumulator + feature(currentValue, krakenFeatures, "accordionKraken"),"")}
+          </div>
+          <h2>Playwrite</h2>
+          <div class="accordion" id="playwriteFeatures">
+            ${features.reduce((accumulator, currentValue) => accumulator + feature(currentValue, playwriteFeatures, "playwriteFeatures"),"")}
           </div>
         </div>
       </body>
     </html>`
 }
 
-function feature(f, info) {
-  let screenshots = fs.readdirSync(`${v3Directory}/${f}`).map(function (item) {
+function feature(f, info, id) {
+  console.log("id "+id)
+  console.log("f "+f)
+  console.log("info "+info)
+
+  let screenshots = fs.readdirSync(`${config.screenshotsPath+"/"+config.versions.kraken.old}/${f}`).map(function (item) {
     let num = item.split('.')
     return parseInt(num, 10);
   });
-  console.log("info "+info)
   screenshots = screenshots.sort(sorter);
 
   return `
   <div class="accordion-item">
-    <h2 class="accordion-header" id="heading${f}">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${f}" aria-expanded="true" aria-controls="collapse${f}">
+    <h2 class="accordion-header" id="heading${id}${f}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${id}${f}" aria-expanded="true" aria-controls="collapse${id}${f}">
         Feature: ${f}
       </button>
     </h2>
-    <div id="collapse${f}" class="accordion-collapse collapse" aria-labelledby="heading${f}" data-bs-parent="#accordionExample">
+    <div id="collapse${id}${f}" class="accordion-collapse collapse" aria-labelledby="heading${id}${f}" data-bs-parent="#${id}">
       <div class="accordion-body">
         ${
           screenshots.reduce((accumulator, s) => accumulator + step(f, s, info), "")
@@ -166,10 +199,10 @@ function step(f, s, info) {
             <tbody>
               <tr>
                 <td>
-                  <img class="img-fluid" src="./${f}/v3-${s}.png" id="refImage" label="Reference">
+                  <img class="img-fluid" src="./${f}/old-${s}.png" id="refImage" label="Reference">
                 </td>
                 <td>
-                  <img class="img-fluid" src="./${f}/v4-${s}.png" id="testImage" label="Test">
+                  <img class="img-fluid" src="./${f}/new-${s}.png" id="testImage" label="Test">
                 </td>
                 <td>
                   <img class="img-fluid" src="./${f}/compare-${s}.png" id="diffImage" label="Diff">
