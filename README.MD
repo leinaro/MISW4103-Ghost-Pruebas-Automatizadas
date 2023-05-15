@@ -16,6 +16,8 @@ Las instrucciones para ejecutar las pruebas con Kraken estan en el siguiente lin
 ## Ejecutar pruebas con Playwrite
 Las instrucciones para ejecutar las pruebas con Playwrite estan en el siguiente link -> [Playwrite](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/blob/main/playwrite/README.md)
 
+## Generar reporte de regresion visual
+
 ## Pruebas de regresion visual
 https://uniandes-my.sharepoint.com/:v:/g/personal/ia_rojas2_uniandes_edu_co/EXn0HnbXGwtLu7HPaa2Zmg4By2-nEBETzP8T29UoOEqAPA?e=gasExK
 
