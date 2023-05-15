@@ -11,46 +11,10 @@ Node v12.22.12 o v14.21.3
 [Instalacion ghost-Docker](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/wiki/Instalacion-Ghost-Con-Docker)
 
 ## Ejecutar pruebas con Kraken
-
-- Este proyecto contiene dos proyectos de kraken configurados para dos versiones diferentes de Ghost `kraken/3.41/` y `kraken/4.44`, para ejecutar las pruebas de cada version debe haber completado la instalación de Ghost para las dos versiones y haber creado los usuarios con correo "test@test.com" y contraseña "Test123456!".
-
-- Instalar kraken
-```
-npm install kraken-node
-```
-- Instalar apium
-```
-npm install -g appium
-```
-- Instalar cucumber
-```
-npm install -g cucumber
-npm i @cucumber/cucumber@7.2.1
-npm install --save-dev chai
-```
-- Cada proyecto Actualizar el archivo kraken/properties.json con los datos configurados en Ghost
-```
-{
-    "HOST": "http://localhost:2368/",
-    "USERNAME": "test@test.com",
-    "PASSWORD": "Test123456!"
-}
-```
-- Para ejecutar las pruebas debe ir a la carpeta kraken del repositorio 
-```
-cd Kraken
-```
-
-- Seleccione un escenario de pruebas de la carpeta kraken/scenarios y copiela a la carpeta kraken.
-
-
-- Ejecutar el escenaro seleccionado de las pruebas end to end 
-```
-npx kraken-node run
-```
+Las instrucciones para ejecutar las pruebas con Kraken estan en el siguiente link -> [kraken](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/blob/main/kraken/Readme.md)
 
 ## Ejecutar pruebas con Playwrite
-Las instrucciones para ejecutar las pruebas con Playwrite estan en el siguiente link -> (Playwrite)[https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/blob/main/playwrite/README.md]
+Las instrucciones para ejecutar las pruebas con Playwrite estan en el siguiente link -> [Playwrite](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/blob/main/playwrite/README.md)
 
 ## Pruebas de regresion visual
 https://uniandes-my.sharepoint.com/:v:/g/personal/ia_rojas2_uniandes_edu_co/EXn0HnbXGwtLu7HPaa2Zmg4By2-nEBETzP8T29UoOEqAPA?e=gasExK
