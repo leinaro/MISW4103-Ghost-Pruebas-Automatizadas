@@ -19,14 +19,14 @@ client.generate({
 function generateMockarooRecord() {
     let random = Math.floor(Math.random() * (this.records.length - 0 + 1) + 0)
     record = this.records[random];
-    console.log('record ' + i, 'headline:' + record.headline + ', tags:' + record.tags);
+    console.log('record ' + random, 'headline:' + record.headline + ', tags:' + record.tags);
     return record 
 }
 
-Given ('Generate mockaroo record', async function()){
-    console.log(">>>>>>>>>>>"+host+url);
+Given ('Generate mockaroo record', async function() {
+    console.log(">>>>>>>>>>> generate mockaroo record");
     this.record = generateMockarooRecord()
-}
+});
 
 Given, When, Then('I go to page {kraken-string} {kraken-string}', async function (host, url) {
     await new Promise(r => setTimeout(r, 5000))
@@ -50,6 +50,15 @@ When('I click new post', async function () {
     await new Promise(r => setTimeout(r, 300))
     let elementNewPost = await this.driver.$(".gh-nav-new-post");
     return await elementNewPost.click();
+});
+
+When('I set post attributes title and body with mockaroo', async function () {
+    let elementTitle = await this.driver.$(".gh-editor-title");
+    await elementTitle.setValue(this.record.headline);
+    let elementContent = await this.driver.$(".koenig-editor__editor");
+    await elementContent.click();
+    await this.deviceClient.browser.keys(["-"]);
+    return await elementContent.setValue(this.record.article_text);
 });
 
 When('I set post attributes title {kraken-string} and body {kraken-string}', async function (title, content) {
@@ -124,6 +133,13 @@ Then('I validate the post publication with title {kraken-string} and content {kr
     let postContent = await this.driver.$(".post-full-content > .post-content").getText();
     return expect(postContent).to.have.string(content);
 
+});
+
+
+Then('I validate the post with mockaroo exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + this.record.headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
 });
 
 Then('I validate the post with {kraken-string} exists', async function (name) {
@@ -215,11 +231,12 @@ When('I select reschedule post', async function () {
 
 });
 
-When('I create new tag with mockaroo_tag', async function () {
+When('I create new tag with mockaroo', async function () {
+    console.log("*****"+ this.record)
     let elementNewTag = await this.driver.$("a[href='#/tags/new/']");
     await elementNewTag.click();
     let elementTitle = await this.driver.$("#tag-name");
-    await elementTitle.setValue(this.generateMockarooRecord().tag);
+    await elementTitle.setValue(this.record.tags);
     let saveButton = await this.driver.$(".gh-canvas-header > .view-actions > button");
     return await saveButton.click();
 });
@@ -231,6 +248,16 @@ When('I create new tag with {kraken-string}', async function (name) {
     await elementTitle.setValue(name);
     let saveButton = await this.driver.$(".gh-canvas-header > .view-actions > button");
     return await saveButton.click();
+});
+
+When('I select tag with name mockaroo', async function () {
+    let menuButton = await this.driver.$(".post-settings");
+    await menuButton.click();
+    let tagCombo = await this.driver.$("#tag-input > ul > input.ember-power-select-trigger-multiple-input");
+    await tagCombo.setValue(this.record.tags);
+    await new Promise(r => setTimeout(r, 3000))
+    let tagOption = await this.driver.$(".//*//li[text() = '" + this.record.tags + "']");
+    return await tagOption.click();
 });
 
 When('I select tag with name {kraken-string}', async function (name) {
@@ -263,6 +290,14 @@ Then('I check page full title with {kraken-string}', async function (title) {
 When('I close settings menu', async function () {
 	let elementCloseSettings = await this.driver.$(".settings-menu-header-action");
     return await elementCloseSettings.click();
+});
+
+
+When('I filter posts by tag with name mockaroo', async function () {
+    let elementTagsCombo = await this.driver.$(".gh-contentfilter-tag > div > .ember-power-select-selected-item");
+    await elementTagsCombo.click();
+    let elementTagOption = await this.driver.$(".//*//li[text() = '" + this.record.tags + "']");
+    return await elementTagOption.click();
 });
 
 When('I filter posts by tag with name {kraken-string}', async function (tag) {
