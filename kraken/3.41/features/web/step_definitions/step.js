@@ -1,6 +1,27 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { assert } = require('chai');
 const expect = require('chai').expect;
+var krakenNode = require('kraken-node');
+delete krakenNode['generateValueForKey'];
+
+var Mockaroo = require('mockaroo');
+var client = new Mockaroo.Client({
+  apiKey: '9655b2d0' // see http://mockaroo.com/api/docs to get your api key
+})
+
+client.generate({
+    count: 100,
+    schema: 'articles'
+  }).then(function(records) {
+    this.records = records
+  });
+
+function generateMockarooRecord() {
+    let random = Math.floor(Math.random() * (this.records.length - 0 + 1) + 0)
+    record = this.records[random];
+    console.log('record ' + i, 'headline:' + record.headline + ', tags:' + record.tags);
+    return record 
+}
 
 Given, When, Then('I go to page {kraken-string} {kraken-string}', async function (host, url) {
     await new Promise(r => setTimeout(r, 5000))
@@ -187,6 +208,15 @@ When('I select reschedule post', async function () {
     let publishButton = await this.driver.$(".gh-btn.gh-btn-blue.gh-publishmenu-button.gh-btn-icon.ember-view");
     return await publishButton.click();
 
+});
+
+When('I create new tag with mockaroo_tag', async function () {
+    let elementNewTag = await this.driver.$("a[href='#/tags/new/']");
+    await elementNewTag.click();
+    let elementTitle = await this.driver.$("#tag-name");
+    await elementTitle.setValue(this.generateMockarooRecord().tag);
+    let saveButton = await this.driver.$(".gh-canvas-header > .view-actions > button");
+    return await saveButton.click();
 });
 
 When('I create new tag with {kraken-string}', async function (name) {
