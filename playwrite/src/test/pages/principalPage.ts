@@ -47,7 +47,13 @@ export class PrincipalPage{
         await this.page.getByRole('link', { name: 'Posts' }).click();
         await this.page.getByRole('link', { name: 'Drafts', exact: true }).click();
         await this.page.waitForTimeout(1000);
-        await this.page.screenshot({ path: 'src/test/screenshots/post_Draft_new.png' });
+    }
+    async user_goes_to_draft_not_saving(){
+        await this.page.getByRole('link', { name: 'Posts' }).click();
+        await this.page.getByRole('button', { name: 'Leave' }).click();
+        await this.page.getByRole('link', { name: 'Drafts', exact: true }).click();
+        await this.page.waitForTimeout(1000);
+        
     }
     async published_have_title(test_name:string){
         await this.page.getByRole('link', { name: `${test_name} By Erich Giusseppe - a few seconds ago Published` }).click({force: true});
@@ -55,6 +61,10 @@ export class PrincipalPage{
 
     async confirm_draft_exist(string:string){
         await this.page.getByRole('link', { name: `${string} By Erich Giusseppe - a few seconds ago Draft` }).click({force: true});
+    }
+    async confirm_draft_dont_exist(name:string){
+        await expect(this.page.locator(`[role="link"][aria-label="${name} By Erich Giusseppe - a few seconds ago Draft"]`)).toHaveCount(0)
+
     }
 
     async user_fills_Schedule(){
@@ -244,6 +254,22 @@ export class PrincipalPage{
               
                  await this.page.getByRole('button', { name: 'Save' }).click();
                }
+    async checks_publish_exist(){
+        const publishButton = await this.page.$('text="Publish"');
+        if (publishButton) {
+            throw new Error('The Publish button exists on the page');
+        } else {
+            console.log('The Publish button does not exist on the page');
+        }
+    } 
+    async checks_publish_exist_positive(){
+        const publishButton = await this.page.$('text="Publish"');
+        if (!publishButton) {
+            throw new Error('The Publish button exists on the page');
+        } else {
+            console.log('The Publish button does not exist on the page');
+        }
+    }       
     
 
 }

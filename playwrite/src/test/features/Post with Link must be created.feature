@@ -6,7 +6,7 @@ Feature: Post autentication
     And User goes to create a new post
     And User fills the link as "http://localhost:2368/ghost/#/signin"
     And User fills the title as "test_4" and description as "test_4"
-    Then User publishes the post
+  Then User publishes the post
     And User goes to published posts
     And User confirms published to have title as "test_4"
     And User confirms published to have the link as "http://localhost:2368/ghost/#/signin"

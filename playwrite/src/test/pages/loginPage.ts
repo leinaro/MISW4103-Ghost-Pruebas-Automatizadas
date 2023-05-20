@@ -27,6 +27,22 @@ export class LoginPage{
 
         
     }
+    async verify_enter(){
+        await this.page.waitForURL('http://localhost:2368/ghost/#/dashboard');
+    }
+    async bad_password(){
+        await this.page.waitForSelector('text="Your password is incorrect."', { state: 'visible' });
+    }
+    async bad_email(){
+        await this.page.waitForSelector('text="There is no user with that email address."', { state: 'visible' });
+    }
+    async no_email(){
+        await this.page.waitForSelector('text="Please fill out the form to sign in. "', { state: 'visible' });
+    }
+    async no_password(){
+        await this.page.waitForSelector('text="Please fill out the form to sign in. "', { state: 'visible' });
+    }
+    
 
 }
 export class LoginPage3_42{

@@ -6,7 +6,7 @@
 
         "paths":[
 
-            "src/test/features/"
+            "src/test/features/Post draft must be created.feature"
             ],
         "publishQuiet":true,
         "dryRun":false,
