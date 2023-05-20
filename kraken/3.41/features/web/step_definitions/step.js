@@ -3,7 +3,7 @@ const { assert } = require('chai');
 const expect = require('chai').expect;
 var krakenNode = require('kraken-node');
 delete krakenNode['generateValueForKey'];
-
+var record = null
 var Mockaroo = require('mockaroo');
 var client = new Mockaroo.Client({
   apiKey: '9655b2d0' // see http://mockaroo.com/api/docs to get your api key
@@ -21,6 +21,11 @@ function generateMockarooRecord() {
     record = this.records[random];
     console.log('record ' + i, 'headline:' + record.headline + ', tags:' + record.tags);
     return record 
+}
+
+Given ('Generate mockaroo record', async function()){
+    console.log(">>>>>>>>>>>"+host+url);
+    this.record = generateMockarooRecord()
 }
 
 Given, When, Then('I go to page {kraken-string} {kraken-string}', async function (host, url) {
