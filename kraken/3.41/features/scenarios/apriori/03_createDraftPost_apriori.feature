@@ -8,7 +8,7 @@ Scenario: Como autor creo un post en draft, y lo busco en lista de draft
     When I click new post
     And I set post attributes title and body valid apriori2
     And I go to page "<HOST>" "ghost/#/posts?type=draft"
-    Then I validate the post with valid apriori category2 exists
+    Then I validate the post with valid apriori headline exists2
     And I go to page "<HOST>" "ghost/#/posts?type=draft"
     And I Click a post with title apriori headline2
     And I press settings button

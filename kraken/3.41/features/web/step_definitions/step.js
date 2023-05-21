@@ -543,6 +543,14 @@ When('I set new member email valid apriori email2', async function () {
     return await sendButton.click();
 });
 
+When('I set new member email valid apriori email3', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(aprioriData[3].email);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
 When('I update the user name to apriori author_name2', async function () {
     let userName = await this.driver.$("#user-name");
     await userName.setValue(aprioriData[2].author_name);
@@ -627,6 +635,13 @@ Then('I validate the user apriori valid email2 exists', async function () {
     await new Promise(r => setTimeout(r, 1000))
 
     let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + aprioriData[2].email + "']");
+    return expect(await userItem.isExisting()).to.be.true;
+});
+
+Then('I validate the user apriori valid email3 exists', async function () {
+    await new Promise(r => setTimeout(r, 1000))
+
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + aprioriData[3].email + "']");
     return expect(await userItem.isExisting()).to.be.true;
 });
 
