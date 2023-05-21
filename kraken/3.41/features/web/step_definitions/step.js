@@ -10,6 +10,15 @@ var client = new Mockaroo.Client({
   apiKey: '9655b2d0' // see http://mockaroo.com/api/docs to get your api key
 })
 
+var aprioriData = readAriclesFile(); 
+
+function readAriclesFile(){
+    const dataJson = require('../../../articles-apriori.json');
+    console.log(typeof dataJson);
+    console.log(dataJson);
+    return dataJson;
+}
+
 client.generate({
     count: 100,
     schema: 'articles'
@@ -31,6 +40,8 @@ function generateMockarooRecord() {
     console.log('record ' + random, 'headline:' + record.headline + ', tags:' + record.tags);
     return record 
 }
+
+
 
 Given ('Generate mockaroo record', async function() {
     console.log(">>>>>>>>>>> generate mockaroo record");
@@ -461,4 +472,256 @@ Then('I can not get page', async function () {
     await expect(errorCode).to.have.string("404");
     let errorDescription = await this.driver.$(".error-description").getText();
     return expect(errorDescription).to.have.string("not found");
+});
+
+
+Given, When, Then('I go to page {kraken-string} apriori tags2', async function (host) {
+    await new Promise(r => setTimeout(r, 5000))
+    console.log(">>>>>>>>>>>"+host+aprioriData[2].tags);
+    return await this.driver.url(host+aprioriData[2].tags);
+});
+
+Given, When, Then('I go to page {kraken-string} apriori headline0', async function (host) {
+    await new Promise(r => setTimeout(r, 5000))
+    console.log(">>>>>>>>>>>"+host+aprioriData[0].headline);
+    return await this.driver.url(host+aprioriData[0].headline);
+});
+
+Given, When, Then('I go to page {kraken-string} apriori category2', async function (host) {
+    await new Promise(r => setTimeout(r, 5000))
+    console.log(">>>>>>>>>>>"+host+aprioriData[2].category);
+    return await this.driver.url(host+aprioriData[2].category);
+});
+
+When('I set post attributes title and body apriori0', async function () {
+    let elementTitle = await this.driver.$(".gh-editor-title");
+    await elementTitle.setValue(aprioriData[0].headline);
+    let elementContent = await this.driver.$(".koenig-editor__editor");
+    await elementContent.click();
+    await this.deviceClient.browser.keys(["-"]);
+    return await elementContent.setValue(aprioriData[0].article_text);
+});
+
+When('I set post attributes title and body valid apriori2', async function () {
+    let elementTitle = await this.driver.$(".gh-editor-title");
+    await elementTitle.setValue(aprioriData[2].headline);
+    let elementContent = await this.driver.$(".koenig-editor__editor");
+    await elementContent.click();
+    await this.deviceClient.browser.keys(["-"]);
+    return await elementContent.setValue(aprioriData[2].article_text);
+});
+
+When('I set new member email apriori email2', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(aprioriData[2].email);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
+When('I set new member email apriori email3', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(aprioriData[3].email);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
+When('I set new member apriori invalid email1', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(aprioriData[1].email);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
+When('I set new member email valid apriori email2', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(aprioriData[2].email);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
+When('I update the user name to apriori author_name2', async function () {
+    let userName = await this.driver.$("#user-name");
+    await userName.setValue(aprioriData[2].author_name);
+    await new Promise(r => setTimeout(r, 300))
+    let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
+    return await elementSave.click();
+});
+
+When('I update the user email to apriori email0', async function () {
+    let userEmail = await this.driver.$("#user-email");
+    await userEmail.setValue(aprioriData[0].email);
+    await new Promise(r => setTimeout(r, 300))
+    let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
+    return await elementSave.click();
+});
+
+Then('I validate the post publication with title and content headline2 article_text2', async function () {
+    let postTitle = await this.driver.$(".//*//h1[text() = '" + aprioriData[2].headline + "']");
+    expect(await postTitle.isExisting()).to.be.true;
+    let postContent = await this.driver.$(".post-full-content > .post-content").getText();
+    return expect(postContent).to.have.string(aprioriData[2].article_text);
+
+});
+
+
+Then('I validate the post with mockaroo exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + this.record.headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the post with apriori headline exists0', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[0].headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the post with valid apriori headline exists2', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[2].headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the post with apriori headline0 not exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[0].headline + "']");
+    return expect(await postItem.isExisting()).to.not.be.true;
+});
+
+Then('I validate the post with apriori headline2 not exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[2].headline + "']");
+    return expect(await postItem.isExisting()).to.not.be.true;
+});
+
+Then('I validate the draft post with apriori headline2 exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//h3[text() = '" + aprioriData[2].headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the schedule post with apriori headline0 exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//h3[text() = '" + aprioriData[0].headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the schedule post with apriori headline2 exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//h3[text() = '" + aprioriData[2].headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the user apriori author_name2 exists', async function () {
+    await new Promise(r => setTimeout(r, 1000))
+
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + aprioriData[2].author_name + "']");
+    return expect(await userItem.isExisting()).to.be.true;
+});
+
+Then('I validate the user apriori valid email2 exists', async function () {
+    await new Promise(r => setTimeout(r, 1000))
+
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + aprioriData[2].email + "']");
+    return expect(await userItem.isExisting()).to.be.true;
+});
+
+Then('I validate the user email apriori email0 exists', async function () {
+    await new Promise(r => setTimeout(r, 3000))
+    let userEmail = await this.driver.$("#user-email").getValue();
+    await new Promise(r => setTimeout(r, 3000));
+    return expect( userEmail).to.be.equal(aprioriData[0].email);
+
+});
+
+Then('I validate invitation for apriori email2 not exists', async function () {
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + aprioriData[2].email + "']");
+    return expect(await userItem.isExisting()).to.be.false;
+});
+
+Then('I validate invitation for apriori email3 not exists', async function () {
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + aprioriData[3].email + "']");
+    return expect(await userItem.isExisting()).to.be.false;
+});
+
+When('I create new tag with apriori category0', async function () {
+    let elementNewTag = await this.driver.$("a[href='#/tags/new/']");
+    await elementNewTag.click();
+    let elementTitle = await this.driver.$("#tag-name");
+    await elementTitle.setValue(aprioriData[0].category);
+    let saveButton = await this.driver.$(".gh-canvas-header > .view-actions > button");
+    return await saveButton.click();
+});
+
+When('I select tag with name mockaroo', async function () {
+    let menuButton = await this.driver.$(".post-settings");
+    await menuButton.click();
+    let tagCombo = await this.driver.$("#tag-input > ul > input.ember-power-select-trigger-multiple-input");
+    await tagCombo.setValue(this.record.tags);
+    await new Promise(r => setTimeout(r, 3000))
+    let tagOption = await this.driver.$(".//*//li[text() = '" + this.record.tags + "']");
+    return await tagOption.click();
+});
+
+When('I select tag with name apriori category0', async function () {
+    let menuButton = await this.driver.$(".post-settings");
+    await menuButton.click();
+    let tagCombo = await this.driver.$("#tag-input > ul > input.ember-power-select-trigger-multiple-input");
+    await tagCombo.setValue(aprioriData[0].category);
+    await new Promise(r => setTimeout(r, 3000))
+    let tagOption = await this.driver.$(".//*//li[text() = '" + aprioriData[0].category + "']");
+    return await tagOption.click();
+});
+
+
+When('I set url field to apriori category2', async function () {
+    let elementUser = await this.driver.$("#url");
+    return await elementUser.setValue(aprioriData[2].category);
+});
+
+When('I set url field to valid apriori tags2', async function () {
+    let elementUser = await this.driver.$("#url");
+    return await elementUser.setValue(aprioriData[2].tags);
+});
+
+Then('I check page full title with apriori headline0', async function () {
+    await new Promise(r => setTimeout(r, 5000))
+    let titleItem = await this.driver.$(".//*//h1[text() = '" + aprioriData[0].headline + "']");
+    return expect(await titleItem.isExisting()).to.be.true;
+});
+
+Then('I check page full title with apriori headline2', async function () {
+    await new Promise(r => setTimeout(r, 5000))
+    let titleItem = await this.driver.$(".//*//h1[text() = '" + aprioriData[2].headline + "']");
+    return expect(await titleItem.isExisting()).to.be.true;
+});
+
+Then('I check page full title with apriori category2', async function () {
+    await new Promise(r => setTimeout(r, 5000))
+    let titleItem = await this.driver.$(".//*//h1[text() = '" + aprioriData[2].category + "']");
+    return expect(await titleItem.isExisting()).to.be.true;
+});
+
+When('I filter posts by tag with name apriori category0', async function () {
+    let elementTagsCombo = await this.driver.$(".gh-contentfilter-tag > div > .ember-power-select-selected-item");
+    await elementTagsCombo.click();
+    let elementTagOption = await this.driver.$(".//*//li[text() = '" + aprioriData[0].category + "']");
+    return await elementTagOption.click();
+});
+
+
+When('I Click a post with title apriori headline2', async function () {
+    await new Promise(r => setTimeout(r, 2000))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[2].headline + "']");
+    return await postItem.click();
+});
+
+When('I Click a post with title apriori headline0', async function () {
+    await new Promise(r => setTimeout(r, 2000))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[0].headline + "']");
+    return await postItem.click();
 });
