@@ -9,6 +9,15 @@ var client = new Mockaroo.Client({
   apiKey: '9655b2d0' // see http://mockaroo.com/api/docs to get your api key
 })
 
+var aprioriData = readAriclesFile(); 
+
+function readAriclesFile(){
+    const dataJson = require('../../../articles-apriori.json');
+    console.log(typeof dataJson);
+    console.log(dataJson);
+    return dataJson;
+}
+
 client.generate({
     count: 100,
     schema: 'articles'
@@ -32,6 +41,24 @@ Given, When, Then('I go to page {kraken-string} {kraken-string}', async function
     await new Promise(r => setTimeout(r, 5000))
     console.log(">>>>>>>>>>>"+host+url);
     return await this.driver.url(host+url);
+});
+
+Given, When, Then('I go to page {kraken-string} apriori tags2', async function (host) {
+    await new Promise(r => setTimeout(r, 5000))
+    console.log(">>>>>>>>>>>"+host+aprioriData[2].tags);
+    return await this.driver.url(host+aprioriData[2].tags);
+});
+
+Given, When, Then('I go to page {kraken-string} apriori headline0', async function (host) {
+    await new Promise(r => setTimeout(r, 5000))
+    console.log(">>>>>>>>>>>"+host+aprioriData[0].headline);
+    return await this.driver.url(host+aprioriData[0].headline);
+});
+
+Given, When, Then('I go to page {kraken-string} apriori category2', async function (host) {
+    await new Promise(r => setTimeout(r, 5000))
+    console.log(">>>>>>>>>>>"+host+aprioriData[2].category);
+    return await this.driver.url(host+aprioriData[2].category);
 });
 
 When('I sign in with {kraken-string} and {kraken-string}', async function (user, pass) {
@@ -61,6 +88,24 @@ When('I set post attributes title {kraken-string} and body {kraken-string}', asy
     return await elementContent.setValue(content);
 });
 
+When('I set post attributes title and body apriori0', async function () {
+    let elementTitle = await this.driver.$(".gh-editor-title");
+    await elementTitle.setValue(aprioriData[0].headline);
+    let elementContent = await this.driver.$(".koenig-editor__editor");
+    await elementContent.click();
+    await this.deviceClient.browser.keys(["-"]);
+    return await elementContent.setValue(aprioriData[0].article_text);
+});
+
+When('I set post attributes title and body valid apriori2', async function () {
+    let elementTitle = await this.driver.$(".gh-editor-title");
+    await elementTitle.setValue(aprioriData[2].headline);
+    let elementContent = await this.driver.$(".koenig-editor__editor");
+    await elementContent.click();
+    await this.deviceClient.browser.keys(["-"]);
+    return await elementContent.setValue(aprioriData[2].article_text);
+});
+
 When('I update post attributes title {kraken-string} and body {kraken-string}', async function (title, content) {
     let elementTitle = await this.driver.$(".gh-editor-title");
     await elementTitle.setValue(title);
@@ -76,6 +121,38 @@ When('I click invite people', async function () {
 When('I set new member email {kraken-string}', async function (email) {
     let elementEmail = await this.driver.$("#new-user-email");
     await elementEmail.setValue(email);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
+When('I set new member email apriori email2', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(aprioriData[2].email);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
+When('I set new member email apriori email3', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(aprioriData[3].email);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
+When('I set new member apriori invalid email1', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(aprioriData[1].email);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
+When('I set new member email valid apriori email2', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(aprioriData[2].email);
     await new Promise(r => setTimeout(r, 300))
     let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
     return await sendButton.click();
@@ -103,9 +180,25 @@ When('I update the user name to {kraken-string}', async function (newName) {
     return await elementSave.click();
 });
 
+When('I update the user name to apriori author_name2', async function () {
+    let userName = await this.driver.$("#user-name");
+    await userName.setValue(aprioriData[2].author_name);
+    await new Promise(r => setTimeout(r, 300))
+    let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
+    return await elementSave.click();
+});
+
 When('I update the user email to {kraken-string}', async function (newEmail) {
     let userEmail = await this.driver.$("#user-email");
     await userEmail.setValue(newEmail);
+    await new Promise(r => setTimeout(r, 300))
+    let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
+    return await elementSave.click();
+});
+
+When('I update the user email to apriori email0', async function () {
+    let userEmail = await this.driver.$("#user-email");
+    await userEmail.setValue(aprioriData[0].email);
     await new Promise(r => setTimeout(r, 300))
     let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
     return await elementSave.click();
@@ -126,15 +219,58 @@ Then('I validate the post publication with title {kraken-string} and content {kr
 
 });
 
+<<<<<<< Updated upstream
+=======
+Then('I validate the post publication with title and content headline2 article_text2', async function () {
+    let postTitle = await this.driver.$(".//*//h1[text() = '" + aprioriData[2].headline + "']");
+    expect(await postTitle.isExisting()).to.be.true;
+    let postContent = await this.driver.$(".post-full-content > .post-content").getText();
+    return expect(postContent).to.have.string(aprioriData[2].article_text);
+
+});
+
+
+Then('I validate the post with mockaroo exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + this.record.headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+>>>>>>> Stashed changes
 Then('I validate the post with {kraken-string} exists', async function (name) {
     await new Promise(r => setTimeout(r, 300))
     let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + name + "']");
     return expect(await postItem.isExisting()).to.be.true;
 });
 
+Then('I validate the post with apriori headline exists0', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[0].headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the post with valid apriori headline exists2', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[2].headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+
 Then('I validate the post with {kraken-string} not exists', async function (name) {
     await new Promise(r => setTimeout(r, 300))
     let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + name + "']");
+    return expect(await postItem.isExisting()).to.not.be.true;
+});
+
+Then('I validate the post with apriori headline0 not exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[0].headline + "']");
+    return expect(await postItem.isExisting()).to.not.be.true;
+});
+
+Then('I validate the post with apriori headline2 not exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[2].headline + "']");
     return expect(await postItem.isExisting()).to.not.be.true;
 });
 
@@ -144,9 +280,27 @@ Then('I validate the draft post with {kraken-string} exists', async function (na
     return expect(await postItem.isExisting()).to.be.true;
 });
 
+Then('I validate the draft post with apriori headline2 exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//h3[text() = '" + aprioriData[2].headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
 Then('I validate the schedule post with {kraken-string} exists', async function (name) {
     await new Promise(r => setTimeout(r, 300))
     let postItem = await this.driver.$(".//*//h3[text() = '" + name + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the schedule post with apriori headline0 exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//h3[text() = '" + aprioriData[0].headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the schedule post with apriori headline2 exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//h3[text() = '" + aprioriData[2].headline + "']");
     return expect(await postItem.isExisting()).to.be.true;
 });
 
@@ -154,6 +308,20 @@ Then('I validate the user {kraken-string} exists', async function (email) {
     await new Promise(r => setTimeout(r, 1000))
 
     let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + email + "']");
+    return expect(await userItem.isExisting()).to.be.true;
+});
+
+Then('I validate the user apriori author_name2 exists', async function () {
+    await new Promise(r => setTimeout(r, 1000))
+
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + aprioriData[2].author_name + "']");
+    return expect(await userItem.isExisting()).to.be.true;
+});
+
+Then('I validate the user apriori valid email2 exists', async function () {
+    await new Promise(r => setTimeout(r, 1000))
+
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + aprioriData[2].email + "']");
     return expect(await userItem.isExisting()).to.be.true;
 });
 
@@ -165,6 +333,14 @@ Then('I validate the user email {kraken-string} exists', async function (email) 
 
 });
 
+Then('I validate the user email apriori email0 exists', async function () {
+    await new Promise(r => setTimeout(r, 3000))
+    let userEmail = await this.driver.$("#user-email").getValue();
+    await new Promise(r => setTimeout(r, 3000));
+    return expect( userEmail).to.be.equal(aprioriData[0].email);
+
+});
+
 When, Then('I revoke invitations', async function () {
     await new Promise(r => setTimeout(r, 1000))
     let revokeButton = await this.driver.$("a.apps-configured-action.red-hover");
@@ -173,6 +349,16 @@ When, Then('I revoke invitations', async function () {
 
 Then('I validate invitation for {kraken-string} not exists', async function (email) {
     let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + email + "']");
+    return expect(await userItem.isExisting()).to.be.false;
+});
+
+Then('I validate invitation for apriori email2 not exists', async function () {
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + aprioriData[2].email + "']");
+    return expect(await userItem.isExisting()).to.be.false;
+});
+
+Then('I validate invitation for apriori email3 not exists', async function () {
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + aprioriData[3].email + "']");
     return expect(await userItem.isExisting()).to.be.false;
 });
 
@@ -233,6 +419,28 @@ When('I create new tag with {kraken-string}', async function (name) {
     return await saveButton.click();
 });
 
+<<<<<<< Updated upstream
+=======
+When('I create new tag with apriori category0', async function () {
+    let elementNewTag = await this.driver.$("a[href='#/tags/new/']");
+    await elementNewTag.click();
+    let elementTitle = await this.driver.$("#tag-name");
+    await elementTitle.setValue(aprioriData[0].category);
+    let saveButton = await this.driver.$(".gh-canvas-header > .view-actions > button");
+    return await saveButton.click();
+});
+
+When('I select tag with name mockaroo', async function () {
+    let menuButton = await this.driver.$(".post-settings");
+    await menuButton.click();
+    let tagCombo = await this.driver.$("#tag-input > ul > input.ember-power-select-trigger-multiple-input");
+    await tagCombo.setValue(this.record.tags);
+    await new Promise(r => setTimeout(r, 3000))
+    let tagOption = await this.driver.$(".//*//li[text() = '" + this.record.tags + "']");
+    return await tagOption.click();
+});
+
+>>>>>>> Stashed changes
 When('I select tag with name {kraken-string}', async function (name) {
     let menuButton = await this.driver.$(".post-settings");
     await menuButton.click();
@@ -240,6 +448,16 @@ When('I select tag with name {kraken-string}', async function (name) {
     await tagCombo.setValue(name);
     await new Promise(r => setTimeout(r, 3000))
     let tagOption = await this.driver.$(".//*//li[text() = '" + name + "']");
+    return await tagOption.click();
+});
+
+When('I select tag with name apriori category0', async function () {
+    let menuButton = await this.driver.$(".post-settings");
+    await menuButton.click();
+    let tagCombo = await this.driver.$("#tag-input > ul > input.ember-power-select-trigger-multiple-input");
+    await tagCombo.setValue(aprioriData[0].category);
+    await new Promise(r => setTimeout(r, 3000))
+    let tagOption = await this.driver.$(".//*//li[text() = '" + aprioriData[0].category + "']");
     return await tagOption.click();
 });
 
@@ -253,9 +471,37 @@ When('I set url field to {kraken-string}', async function (url) {
     return await elementUser.setValue(url);
 });
 
+When('I set url field to apriori category2', async function () {
+    let elementUser = await this.driver.$("#url");
+    return await elementUser.setValue(aprioriData[2].category);
+});
+
+When('I set url field to valid apriori tags2', async function () {
+    let elementUser = await this.driver.$("#url");
+    return await elementUser.setValue(aprioriData[2].tags);
+});
+
 Then('I check page full title with {kraken-string}', async function (title) {
     await new Promise(r => setTimeout(r, 5000))
     let titleItem = await this.driver.$(".//*//h1[text() = '" + title + "']");
+    return expect(await titleItem.isExisting()).to.be.true;
+});
+
+Then('I check page full title with apriori headline0', async function () {
+    await new Promise(r => setTimeout(r, 5000))
+    let titleItem = await this.driver.$(".//*//h1[text() = '" + aprioriData[0].headline + "']");
+    return expect(await titleItem.isExisting()).to.be.true;
+});
+
+Then('I check page full title with apriori headline2', async function () {
+    await new Promise(r => setTimeout(r, 5000))
+    let titleItem = await this.driver.$(".//*//h1[text() = '" + aprioriData[2].headline + "']");
+    return expect(await titleItem.isExisting()).to.be.true;
+});
+
+Then('I check page full title with apriori category2', async function () {
+    await new Promise(r => setTimeout(r, 5000))
+    let titleItem = await this.driver.$(".//*//h1[text() = '" + aprioriData[2].category + "']");
     return expect(await titleItem.isExisting()).to.be.true;
 });
 
@@ -269,6 +515,13 @@ When('I filter posts by tag with name {kraken-string}', async function (tag) {
     let elementTagsCombo = await this.driver.$(".gh-contentfilter-tag > div > .ember-power-select-selected-item");
     await elementTagsCombo.click();
     let elementTagOption = await this.driver.$(".//*//li[text() = '" + tag + "']");
+    return await elementTagOption.click();
+});
+
+When('I filter posts by tag with name apriori category0', async function () {
+    let elementTagsCombo = await this.driver.$(".gh-contentfilter-tag > div > .ember-power-select-selected-item");
+    await elementTagsCombo.click();
+    let elementTagOption = await this.driver.$(".//*//li[text() = '" + aprioriData[0].category + "']");
     return await elementTagOption.click();
 });
 
@@ -291,6 +544,18 @@ When('I delete post', async function () {
 When('I Click a post with title {kraken-string}', async function (title) {
     await new Promise(r => setTimeout(r, 2000))
     let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + title + "']");
+    return await postItem.click();
+});
+
+When('I Click a post with title apriori headline2', async function () {
+    await new Promise(r => setTimeout(r, 2000))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[2].headline + "']");
+    return await postItem.click();
+});
+
+When('I Click a post with title apriori headline0', async function () {
+    await new Promise(r => setTimeout(r, 2000))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + aprioriData[0].headline + "']");
     return await postItem.click();
 });
 
