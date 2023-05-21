@@ -3,11 +3,12 @@ Feature: Crear un nuevo post en draft, buscarlo en la lista de draft, modificarl
 @user1 @web
 Scenario: Como autor creo un post en draft, lo modificao y valido las modificaciones
     Given I go to page "<HOST>" "ghost/#/signin"
+    And Generate mockaroo record
     And I sign in with "<USERNAME>" and "<PASSWORD>" 
     And I click new post
-    And I set post attributes title "$number_1" and body "$string_1"
+    And I set post attributes title and body with mockaroo
     And I go to page "<HOST>" "ghost/#/posts?type=draft"
-    And I Click a post with title "$$number_1"
-    When I set post attributes title "$number_2" and body "$string_2"
+    And I Click a post with title mockaroo
+    When I set post attributes title and body with mockaroo
     And I go to page "<HOST>" "ghost/#/posts?type=draft"
-    And I validate the draft post with "$$number_2" exists 
+    And I validate the draft post with mockaroo exists 

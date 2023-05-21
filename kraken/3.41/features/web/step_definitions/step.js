@@ -4,6 +4,7 @@ const expect = require('chai').expect;
 var krakenNode = require('kraken-node');
 delete krakenNode['generateValueForKey'];
 var record = null
+var previousRecord = null
 var Mockaroo = require('mockaroo');
 var client = new Mockaroo.Client({
   apiKey: '9655b2d0' // see http://mockaroo.com/api/docs to get your api key
@@ -17,6 +18,14 @@ client.generate({
   });
 
 function generateMockarooRecord() {
+    console.log("iarl---"+this.record)
+    console.log("iarl---"+this.previousRecord)
+
+    if (this.record != undefined){
+        console.log("iarl---siiii")
+        this.previousRecord = this.record
+    }
+    
     let random = Math.floor(Math.random() * (this.records.length - 0 + 1) + 0)
     record = this.records[random];
     console.log('record ' + random, 'headline:' + record.headline + ', tags:' + record.tags);
@@ -25,7 +34,26 @@ function generateMockarooRecord() {
 
 Given ('Generate mockaroo record', async function() {
     console.log(">>>>>>>>>>> generate mockaroo record");
+    if (this.record != undefined){
+        console.log("iarl---siiii")
+        this.previousRecord = this.record
+    }
     this.record = generateMockarooRecord()
+});
+
+Given, When, Then('I go to previous page {kraken-string} post details', async function (host) {
+    await new Promise(r => setTimeout(r, 5000))
+    console.log("iarl >>>>")
+    console.log("iarl >>>>"+host)
+    console.log("iarl >>>>"+this.previousRecord)
+    console.log(">>>>>>>>>>>"+host+this.previousRecord.source.replace(".", "-"));
+    return await this.driver.url(host+this.previousRecord.source.replace(".", "-"));
+});
+
+Given, When, Then('I go to page {kraken-string} post details', async function (host) {
+    await new Promise(r => setTimeout(r, 5000))
+    console.log(">>>>>>>>>>>"+host+this.record.source.replace(".", "-"));
+    return await this.driver.url(host+this.record.source.replace(".", "-"));
 });
 
 Given, When, Then('I go to page {kraken-string} {kraken-string}', async function (host, url) {
@@ -82,6 +110,22 @@ When('I click invite people', async function () {
     return await elementInvitePeople.click();
 });
 
+When('I set new member invalid email with mockaroo', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(this.record.author_name);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
+When('I set new member email with mockaroo', async function () {
+    let elementEmail = await this.driver.$("#new-user-email");
+    await elementEmail.setValue(this.record.email);
+    await new Promise(r => setTimeout(r, 300))
+    let sendButton = await this.driver.$("button.gh-btn.gh-btn-green.gh-btn-icon.ember-view");
+    return await sendButton.click();
+});
+
 When('I set new member email {kraken-string}', async function (email) {
     let elementEmail = await this.driver.$("#new-user-email");
     await elementEmail.setValue(email);
@@ -104,9 +148,25 @@ When('I navigate to user {kraken-string} details', async function (name) {
     return await userItem.click();
 });
 
+When('I update the user name to mockaroo', async function () {
+    let userName = await this.driver.$("#user-name");
+    await userName.setValue(this.record.author_name);
+    await new Promise(r => setTimeout(r, 300))
+    let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
+    return await elementSave.click();
+});
+
 When('I update the user name to {kraken-string}', async function (newName) {
     let userName = await this.driver.$("#user-name");
     await userName.setValue(newName);
+    await new Promise(r => setTimeout(r, 300))
+    let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
+    return await elementSave.click();
+});
+
+When('I update the user email to mockaroo', async function () {
+    let userEmail = await this.driver.$("#user-email");
+    await userEmail.setValue(this.record.email);
     await new Promise(r => setTimeout(r, 300))
     let elementSave = await this.driver.$("button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view");
     return await elementSave.click();
@@ -127,14 +187,19 @@ When('I click on view post from settings', async function () {
     return await viewPostLink.click();
 });
 
+Then('I validate the post publication with title and content mockaroo', async function () {
+    let postTitle = await this.driver.$(".//*//h1[text() = '" + this.record.headline + "']");
+    expect(await postTitle.isExisting()).to.be.true;
+    let postContent = await this.driver.$(".post-full-content > .post-content").getText();
+    return expect(postContent).to.have.string(this.record.article_text);
+});
+
 Then('I validate the post publication with title {kraken-string} and content {kraken-string}', async function (title, content) {
     let postTitle = await this.driver.$(".//*//h1[text() = '" + title + "']");
     expect(await postTitle.isExisting()).to.be.true;
     let postContent = await this.driver.$(".post-full-content > .post-content").getText();
     return expect(postContent).to.have.string(content);
-
 });
-
 
 Then('I validate the post with mockaroo exists', async function () {
     await new Promise(r => setTimeout(r, 300))
@@ -148,15 +213,34 @@ Then('I validate the post with {kraken-string} exists', async function (name) {
     return expect(await postItem.isExisting()).to.be.true;
 });
 
+Then('I validate the post with mockaroo not exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + this.record.headline + "']");
+    return expect(await postItem.isExisting()).to.not.be.true;
+});
+
 Then('I validate the post with {kraken-string} not exists', async function (name) {
     await new Promise(r => setTimeout(r, 300))
     let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + name + "']");
     return expect(await postItem.isExisting()).to.not.be.true;
 });
 
+
+Then('I validate the draft post with mockaroo exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//h3[text() = '" + this.record.headline + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
 Then('I validate the draft post with {kraken-string} exists', async function (name) {
     await new Promise(r => setTimeout(r, 300))
     let postItem = await this.driver.$(".//*//h3[text() = '" + name + "']");
+    return expect(await postItem.isExisting()).to.be.true;
+});
+
+Then('I validate the schedule post with mockaroo exists', async function () {
+    await new Promise(r => setTimeout(r, 300))
+    let postItem = await this.driver.$(".//*//h3[text() = '" + this.record.headline + "']");
     return expect(await postItem.isExisting()).to.be.true;
 });
 
@@ -166,6 +250,19 @@ Then('I validate the schedule post with {kraken-string} exists', async function 
     return expect(await postItem.isExisting()).to.be.true;
 });
 
+
+Then('I validate the user name mockaroo exists', async function () {
+    await new Promise(r => setTimeout(r, 1000))
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + this.record.author_name + "']");
+    return expect(await userItem.isExisting()).to.be.true;
+});
+
+Then('I validate the user mockaroo exists', async function () {
+    await new Promise(r => setTimeout(r, 1000))
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + this.record.email + "']");
+    return expect(await userItem.isExisting()).to.be.true;
+});
+
 Then('I validate the user {kraken-string} exists', async function (email) {
     await new Promise(r => setTimeout(r, 1000))
 
@@ -173,18 +270,29 @@ Then('I validate the user {kraken-string} exists', async function (email) {
     return expect(await userItem.isExisting()).to.be.true;
 });
 
+Then('I validate the user email mockaroo exists', async function () {
+    await new Promise(r => setTimeout(r, 3000))
+    let userEmail = await this.driver.$("#user-email").getValue();
+    await new Promise(r => setTimeout(r, 3000));
+    return expect(userEmail).to.be.equal(this.record.email);
+});
+
 Then('I validate the user email {kraken-string} exists', async function (email) {
     await new Promise(r => setTimeout(r, 3000))
     let userEmail = await this.driver.$("#user-email").getValue();
     await new Promise(r => setTimeout(r, 3000));
-    return expect( userEmail).to.be.equal(email);
-
+    return expect(userEmail).to.be.equal(email);
 });
 
 When, Then('I revoke invitations', async function () {
     await new Promise(r => setTimeout(r, 1000))
     let revokeButton = await this.driver.$("a.apps-configured-action.red-hover");
     return await revokeButton.click()
+});
+
+Then('I validate invitation for mockaroo not exists', async function () {
+    let userItem = await this.driver.$(".//*//article[contains(@class, 'apps-card-app')]//*//h3[text() = '" + this.record.email + "']");
+    return expect(await userItem.isExisting()).to.be.false;
 });
 
 Then('I validate invitation for {kraken-string} not exists', async function (email) {
@@ -275,9 +383,21 @@ When('I press settings button', async function () {
     return await menuButton.click();
 });
 
+When('I set url field to mockaroo', async function () {
+    let elementUser = await this.driver.$("#url");
+    return await elementUser.setValue(this.record.source.replace(".", "-"));
+});
+
 When('I set url field to {kraken-string}', async function (url) {
     let elementUser = await this.driver.$("#url");
     return await elementUser.setValue(url);
+});
+
+
+Then('I check page full title with mockaroo', async function () {
+    await new Promise(r => setTimeout(r, 5000))
+    let titleItem = await this.driver.$(".//*//h1[text() = '" + this.record.headline+ "']");
+    return expect(await titleItem.isExisting()).to.be.true;
 });
 
 Then('I check page full title with {kraken-string}', async function (title) {
@@ -321,6 +441,13 @@ When('I delete post', async function () {
     await new Promise(r => setTimeout(r, 5000))
     let spanButton = await this.driver.$("button.gh-btn-red");
     return await spanButton.click();
+});
+
+
+When('I Click a post with title mockaroo', async function () {
+    await new Promise(r => setTimeout(r, 2000))
+    let postItem = await this.driver.$(".//*//ol[contains(@class, 'posts-list')]//*//h3[text() = '" + this.record.headline + "']");
+    return await postItem.click();
 });
 
 When('I Click a post with title {kraken-string}', async function (title) {

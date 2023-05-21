@@ -3,6 +3,7 @@ Feature: Crear un tag, Crear un nuevo post, agregarle el tag y publicarlo ,y eli
 @user1 @web
 Scenario: Como autor creo un tag, creo un post y le asigno el tag,elimino el post y valido que no aparece en filtro por tag
     Given I go to page "<HOST>" "ghost/#/signin"
+    And Generate mockaroo record
     And I sign in with "<USERNAME>" and "<PASSWORD>"
     And I go to page "<HOST>" "ghost/#/tags" 
     And I create new tag with "$number_1"
