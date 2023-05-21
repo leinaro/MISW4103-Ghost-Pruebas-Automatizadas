@@ -68,6 +68,10 @@ Then('User confirms published to have title as {string}', async function (test_n
   Then('User navigates to link as {string}', async function (link) {
     await pageFixture.principal_page.user_goes_to_link(link)
   });
+  Then('User confirms draft to have title', async function () {
+    // Write code here that turns the phrase above into concrete actions
+    await pageFixture.principal_page.confirm_draft_exist(title_g)
+  });
 
   Then('User confirms draft to have title as {string}', async function (string) {
     // Write code here that turns the phrase above into concrete actions

@@ -24,7 +24,7 @@ Feature: Post autentication
     And User goes to create a new post
     And User fills the title as "" and description as "VALID_DESCRIPTION"
     Then User checks if the publish button exists
-  Scenario: User Post must should let create with no title 
+  Scenario: User Post must not should let create with no title 
     And User enter the username as "eg.soto@uniandes.edu.co" and password as "Supermean_1" and click the login button
     And User goes to create a new post
     And User fills the title as "" and description as "VALID_DESCRIPTION"

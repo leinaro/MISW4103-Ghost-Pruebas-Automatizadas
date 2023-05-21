@@ -26,6 +26,11 @@ Password: Supermean_1
 Para ejecutar ambos entornos se necesitan dos versiones la 3.42 de ghost y la version 5.47.0 de ghost, por ende para ello, se necesita que se intale en el local la version 5.47.0 de ghost se ejecute y se haga el usuario respectivo y se ejecute la version 3.42 con docker.
 docker run -d -e url=http://localhost:3001 -p 3001:2368 --name ghost_3.42 ghost:3.42
 si tienen windows va a tener que instalar docker desktop y pasarle ese mismo contanto y hacerle run mediante la interfaz grafica.
+## Con respecto a los nuevos test, en esatas pruebas ahora van a haber algunos casos de prueba donde existan fallas en los test.
+Todas estas fallas son bugs y estan reportadas en el repositorio como issues.
+
+## Con respecto a las pruebas hechas con playwright 
+En su mayoria se utilizo la estrategia con faker de generación de datos online, y por otro lado tambien se implementarion, para el loggin de forma correcta, un pool de datos, pero dado que solo se tiene por la ejecición local del ghost un usuario administrador este esta representado como texto que se le envia directamente en las pruebas siendo un pool de un usuario y una contraseña.
 
 
 
