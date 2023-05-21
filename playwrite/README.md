@@ -13,7 +13,7 @@ Despues de tener instalada la version de ghost de forma local, dentro de la carp
   }
  ```
  Ejemplo de esto:
-image.png
+![imagen](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/assets/63005873/c612f1ab-d590-4641-a607-fb2889e0ca94)
 y ejecutar los siguientes comandos dentro de el repositorio de playwrite:
 ```
 npm install
