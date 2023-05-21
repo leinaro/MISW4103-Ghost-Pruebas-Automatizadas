@@ -6,7 +6,7 @@ Scenario: Como admin invito un nuevo usuario y valido que se agregue correctamen
     And I sign in with "<USERNAME>" and "<PASSWORD>" 
     And I go to page "<HOST>" "ghost/#/staff"
     When I click invite people
-    And I set new member email "$email_1"
+    And I set new member email valid apriori email3
     And I go to page "<HOST>" "ghost/#/staff"
-    Then I validate the user "$$email_1" exists
+    Then I validate the user apriori valid email3 exists
     And I revoke invitations

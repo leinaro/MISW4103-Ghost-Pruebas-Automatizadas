@@ -22,6 +22,8 @@ Las instrucciones para ejecutar las el reporte de regresión visual están en el
 ## Pruebas de regresion visual
 EL video con los cambios realizados para poder realizar la regresión visual está en el siguiente link->[Video](https://uniandes-my.sharepoint.com/:v:/g/personal/ia_rojas2_uniandes_edu_co/EXn0HnbXGwtLu7HPaa2Zmg4By2-nEBETzP8T29UoOEqAPA?e=gasExK) 
 
+## Estrategias para la generación de datos
+Le siguiente enlace podra encontrar las estrategias para la generación de datos en kraken y playwrite -> [Generación de datos](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/wiki/Escenarios-de-prueba-de-validaci%C3%B3n-de-datos)
 
 ## Escenarios de prueba 
 
