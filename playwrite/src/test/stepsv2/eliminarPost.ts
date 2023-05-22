@@ -8,6 +8,3 @@ Then('User deletes post', async function () {
   });
 
 
-Then('User validates there is no post as {string}', async function (string:string) {
-    await pageFixture.principal_page.validates_post_eliminated(string)
-});

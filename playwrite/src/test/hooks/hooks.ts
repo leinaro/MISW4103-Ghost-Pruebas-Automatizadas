@@ -31,7 +31,6 @@ Before(async function(scenario){
 
 });
 AfterStep(async function(scenario) {
-    console.log(scenario.pickle.name)
     let featurePath = scenario.pickle.uri.split('\\');
     var last = featurePath[featurePath.length-1];
     let featureName = last.split('.')[0].split('_')[0];
@@ -44,7 +43,6 @@ AfterStep(async function(scenario) {
               recursive: true
             });
             const absolutePath = path.resolve('../screenshots/5-47-0/'+featureName);
-            console.log(absolutePath);
         }
         
         if (!fs.existsSync('../screenshots/5-47-0/'+featureName )) {
@@ -52,13 +50,11 @@ AfterStep(async function(scenario) {
                 recursive: true
             });
             const absolutePath = path.resolve('../screenshots/5-47-0/'+featureName);
-            console.log(absolutePath);
         }
         stepCount += 1;
         await pageFixture.login_page.page.screenshot({ path: '../screenshots/'  +'5-47-0/'+featureName+'/'+ stepCount + '.png'});
     } else if (firstSubstring === "User2") {
         const absolutePath = path.resolve('../screenshots/3-42/'+featureName);
-        console.log(absolutePath);
         if (!fs.existsSync('../screenshots/3-42')) {
             fs.mkdirSync('../screenshots/3-42/'+featureName, {
               recursive: true
@@ -71,7 +67,6 @@ AfterStep(async function(scenario) {
               recursive: true
             });
             const absolutePath = path.resolve('../screenshots/3-42/'+featureName);
-            console.log(absolutePath);
           }
         stepCount += 1;
         await pageFixture.login_page_3_42.page.screenshot({ path: '../screenshots/'  +'3-42/'+featureName+'/'+ stepCount + '.png'});

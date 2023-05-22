@@ -5,9 +5,9 @@ Feature: Post autentication
   Scenario: User Post draft must be created
     And User enter the username as "eg.soto@uniandes.edu.co" and password as "Supermean_1" and click the login button
     And User goes to create a new post
-    And User fills the title as "test_2" and description as "test_2"
+    And User fills the title as "VALID_TITLE" and description as "VALID_DESCRIPTION"
     And User goes to draft posts
-    And User confirms draft to have title as "test_2"
+    And User confirms draft to have title
  Scenario: User Post draft must not be created because invalid title with more than 255 characters
     And User enter the username as "eg.soto@uniandes.edu.co" and password as "Supermean_1" and click the login button
     And User goes to create a new post

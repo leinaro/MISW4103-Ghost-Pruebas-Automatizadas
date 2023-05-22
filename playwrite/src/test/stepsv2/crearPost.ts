@@ -5,7 +5,7 @@ import { pageFixture } from "../hooks/pageFixture";
 import { LoginPage } from "../pages/loginPage";
 import { faker } from '@faker-js/faker';
 let title_g:string;
-setDefaultTimeout(2000)
+setDefaultTimeout(10000)
 Given('User navigates to the application', async function () {
   await pageFixture.login_page.navigation()
 });
@@ -20,6 +20,9 @@ Then('User goes to published posts', async function () {
   });
 Then('User confirms published to have title as {string}', async function (test_name) {
   await pageFixture.principal_page.published_have_title(test_name)
+});
+Then('User confirms published to have title', async function () {
+  await pageFixture.principal_page.published_have_title(title_g)
 });
 
   Given('User goes to create a new post', async function () {
@@ -92,6 +95,10 @@ Then('User confirms post Schedule to have title as {string}', async function (st
     // Write code here that turns the phrase above into concrete actions
     await pageFixture.principal_page.user_confirms_Schedule(string)
   });
+  Then('User confirms post Schedule to have title', async function () {
+    // Write code here that turns the phrase above into concrete actions
+    await pageFixture.principal_page.user_confirms_Schedule(title_g)
+  });
   Then('User goes to published Schedule posts', async function () {
     await pageFixture.principal_page.user_goes_to_schedule()
   });
@@ -116,6 +123,9 @@ Given('User fills the tag as {string}', async function (string) {
   Then('User confirms published to have tag in post as {string}', async function (string) {
     await pageFixture.principal_page.user_confirms_tag_post(string)
   });
+  Then('User confirms published to have tag in post', async function () {
+    await pageFixture.principal_page.user_confirms_tag_post(title_g)
+  });
 Then('User checks if the publish button exists', async function () {
   // Write code here that turns the phrase above into concrete actions
   await pageFixture.principal_page.checks_publish_exist()
@@ -123,4 +133,7 @@ Then('User checks if the publish button exists', async function () {
 Then('User checks if the publish button exists positive', async function () {
   // Write code here that turns the phrase above into concrete actions
   await pageFixture.principal_page.checks_publish_exist_positive()
+});
+Then('User validates there is no post', async function () {
+  await pageFixture.principal_page.validates_post_eliminated(title_g)
 });

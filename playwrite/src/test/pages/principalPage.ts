@@ -92,6 +92,8 @@ export class PrincipalPage{
         await this.page.getByRole('button', { name: 'Meta data' }).click();
         await this.page.waitForTimeout(4000);
         const value= await this.page.locator('input[name="post-setting-canonicalUrl"]').inputValue();
+        console.log(value)
+        console.log("HPTAMKA")
         if(value !== link) {
             throw new Error(link);
         }
