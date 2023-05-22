@@ -26,6 +26,10 @@ npm install faker
 ## Patrones
 Con respecto a los patrones el primero de pageObject -> Estos estan representados en los objetos de login page y principalpage, los cuales tienen la logica, para así abstraer aun más todo lo que es la logica, por otro lado se usaron en todo locators para tener buenas practicas.
 Mientras que el segundo patron lo hicimos, integrando playwright con cucumber
+## Estrategia para la generacion de datos
+#A priori y En linea
+Antes de la ejecucion de escenario de crea con un pull de datos el cual se combina con la creacion de datos en linea, es decir en la ejecucion.
+En el alchivo data.json de observan los datos generados andes de cada escenario, y en algunos metodos de declaran variables aleatorias para la generacion en linea.
 
 ## Ejecutar las pruebas
 Ahora para correr los test es necesario crear un usuario, (esto para ambas versiones ) una vez instale la aplicación el usuario tiene que tener los siguientes parametros:
