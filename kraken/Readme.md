@@ -38,7 +38,12 @@ npm install --save-dev chai
 }
 ```
 
-- Para la versión 3.41, en la carpeta `/kraken/3.41/features/` se encuentran los `*.features` configurados para las pruebas de regresión visual. Para sistemas operativos MAC, puede ejecutar las pruebas al mismo tiempo. Para sistemas operativos Windows, debe mantener solo un `*.feature` en la carpeta `/kraken/3.41/features/` y ejecutar las pruebas una a una. Si quiere ejecutar otros escenarios puede seleccionar el escenario de pruebas de la carpeta `/kraken/3.41/features/scenarios` y copiarlo a la carpeta `/kraken/3.41/features/`.
+- Para la versión 3.41, en la carpeta `/kraken/3.41/features/` se encuentran las carpetas apriori, faker y mockaroo con los archivos `*.features` configurados para las pruebas de regresión visual con diferentes estrategias de generación de datos. Para sistemas operativos MAC, puede ejecutar las pruebas al mismo tiempo. Para sistemas operativos Windows, debe mantener solo un `*.feature` en la carpeta `/kraken/3.41/features/` y ejecutar las pruebas una a una. Si quiere ejecutar otros escenarios puede seleccionar el escenario de pruebas de la carpeta
+ `/kraken/3.41/features/scenarios/` 
+ 
+ ![image](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/assets/123895702/64518d84-4520-4ee3-afbc-eafad3789a76)
+ 
+ y **copiarlo** a la carpeta `/kraken/3.41/features/`.
 
 - En la linea de comandos navegue hasta la ubicación del proyecto, ejecuté el siguiente comando para ir a la carpeta `kraken/3.41/  
 ```

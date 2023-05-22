@@ -3,6 +3,7 @@ Para la ejecución de este proyecto usted debe tener la version de ghost:
 Ghost-CLI version: 1.24.0
 Ghost version: 5.47.0
 Despues de tener instalada la version de ghost de forma local, dentro de la carpeta donde usted pone ghost start, para iniciar este, debera encontrar un archivo .json llamado config.development.json, y aca añadira la siguiente linea de codigo al .json:
+```
   "spam": {
     "user_login": {
         "minWait": 0,
@@ -10,8 +11,9 @@ Despues de tener instalada la version de ghost de forma local, dentro de la carp
         "freeRetries": 50
     }
   }
+ ```
  Ejemplo de esto:
-image.png
+![imagen](https://github.com/leinaro/MISW4103-Ghost-Pruebas-Automatizadas/assets/63005873/c612f1ab-d590-4641-a607-fb2889e0ca94)
 y ejecutar los siguientes comandos dentro de el repositorio de playwrite:
 ```
 npm install
