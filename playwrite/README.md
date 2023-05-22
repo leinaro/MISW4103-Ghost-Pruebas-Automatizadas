@@ -28,7 +28,7 @@ Con respecto a los patrones el primero de pageObject -> Estos estan representado
 Mientras que el segundo patron lo hicimos, integrando playwright con cucumber
 ## Estrategia para la generacion de datos
 La estegias usadas son a priori y en linea:
-Antes de la ejecucion de algunos escenario de crea con un pull de datos con la libreria faker, junto con la creacion de datos en linea, es decir en la ejecucion.
+Antes de la ejecucion de algunos escenarios de crea con un pull de datos con la libreria faker, junto con la creacion de datos en linea, es decir en la ejecucion.
 En el alchivo data.json de observan los datos generados andes de algunos escenarios, y en algunos metodos de declaran variables aleatorias para la generacion en linea.
 
 ## Ejecutar las pruebas
