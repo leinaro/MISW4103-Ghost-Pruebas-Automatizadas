@@ -1,11 +1,61 @@
 import { Page, expect } from "@playwright/test"
-
-
+import { faker } from '@faker-js/faker';
+import * as fs from 'fs';
 export class PrincipalPage{
     page: Page
     constructor(page:Page){
         this.page=page
     }
+async fakerUser(){
+   
+   // let faker = require('faker');
+   // let fs = require('fs');
+    
+    function generateMembers() {
+        
+      let members: {id:number; first_name: string; last_name:string;email:string }[] = [];
+     
+      for (let id = 1; id <= 10; id++) {
+        let firstName = faker.name.firstName();
+        let lastName = faker.name.lastName();
+        let email = faker.internet.email();
+        members.push({
+          id: id,
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+        });
+      }
+      return { members:members };
+    }
+    module.exports = generateMembers;
+    
+    let dataObj = generateMembers();
+    fs.writeFileSync('data.json', JSON.stringify(dataObj, null, '\t'));
+
+}
+
+
+async putNoteMembers(username:string,newusername:string, note:string){
+    //await this.page.goto('http://localhost:2368/ghost/#/members');
+    //await this.page.getByRole('link', { name: 'New member' }).click();
+   // await this.page.getByLabel('Name').fill(`${username}`);
+
+   //await this.page.getByLabel('Email').fill(`${usermail}`);
+   // await this.page.screenshot({path: 'src/test/screenshots/4.newMenber.png'});
+   // await this.page.getByText('(not visible to member)').click();
+     await this.page.getByLabel('Note (not visible to member)').fill(`${note}`);
+    await this.page.getByRole('button', { name: 'Save' }).click();
+    await this.page.screenshot({path: 'z.note.png'});
+    
+}
+async go_to_members(){
+    //await this.page.getByRole('link', { name: 'Posts', exact: true }).click();
+   // await this.page.goto('http://localhost:2368/ghost/#/members');
+   await this.page.getByRole('link', { name: 'Members', exact: true }).click();
+    //await this.page.waitForTimeout(2000);
+    //await this.page.screenshot({ path: 'z.png' });
+}
     async go_create_new_post(){
 
         await this.page.getByRole('link', { name: 'Posts', exact: true }).click();
@@ -27,7 +77,7 @@ export class PrincipalPage{
         await this.page.locator('.koenig-editor__editor').fill(description);
     }
     async user_goes_to_link(link:string){
-        await this.page.goto(link)
+        await this.page.goto(link);
     }
     async user_goes_to_schedule(){
         await this.page.getByRole('button', { name: 'Editor', exact: true }).click();
@@ -92,8 +142,6 @@ export class PrincipalPage{
         await this.page.getByRole('button', { name: 'Meta data' }).click();
         await this.page.waitForTimeout(4000);
         const value= await this.page.locator('input[name="post-setting-canonicalUrl"]').inputValue();
-        console.log(value)
-        console.log("HPTAMKA")
         if(value !== link) {
             throw new Error(link);
         }
@@ -182,13 +230,14 @@ export class PrincipalPage{
     async post_setting(){
   await this.page.getByRole('button', { name: 'Settings' }).click(); 
     }
+
     async createNewMembers(username:string,usermail:string,nota:string){
-    
+   //await new Promise(r => setTimeout(r, 1000));
         await this.page.goto('http://localhost:2368/ghost/#/members');
         await this.page.getByRole('link', { name: 'New member' }).click();
         await this.page.getByLabel('Name').fill(`${username}`);
         //await this.page.getByLabel('Email').click();
-        await this.page.getByLabel('Email').fill(`${Math.random()+usermail}`);
+        await this.page.getByLabel('Email').fill(`${usermail}`);
         await this.page.screenshot({path: 'src/test/screenshots/4.newMenber.png'});
         await this.page.getByText('(not visible to member)').click();
          await this.page.getByLabel('Note (not visible to member)').fill(`${nota}`);
@@ -200,61 +249,46 @@ export class PrincipalPage{
            
            async editMembers(username:string,newusername:string){
         
-            //await this.page.goto('http://localhost:2368/ghost/#/members');
-           //await this.page.getByRole('link', { name: 'New member' }).click();
-                //await new Promise(r => setTimeout(r, 3000));
-        //    await this.page.getByRole('link', { name: 'Members' }).click();
-        //     await this.page.getByLabel('Name').click();
-        //     await this.page.getByLabel('Name').press('CapsLock');
-            // await this.page.getByLabel('Name').fill(`${username}`);
-            // await this.page.getByLabel('Email').click();
-            await this.page.getByRole('link', { name: 'Members' }).click();
-            //await new Promise(r => setTimeout(r, 3000));
-           // await this.page.screenshot({path:'z0.png'});
-           await this.page.getByRole('link', { name: `${username}` }).click();
-            await this.page.screenshot({path:'src/test/screenshots/z1.png'});
-            //await this.page.getByLabel('Name').click();
-            await this.page.getByLabel('Name').fill(`${newusername}`);
-            // await this.page.getByLabel('Email').fill(`${newusermail}`);
-            //await this.page.screenshot({path: '4.newMenber.png'});
-            await this.page.getByText('(not visible to member)').click();
+            await this.page.goto('http://localhost:2368/ghost/#/members');
+           
+            await this.page.getByRole('link', { name: 'Members 1' }).click();
+            await this.page.getByRole('link', { name: 'rrr@hotmail.com' }).click();
+            await this.page.getByLabel('Email').click();
+            await this.page.getByLabel('Email').click();
+            await this.page.getByLabel('Email').fill('rrr@hotmail1.com');
             await this.page.getByLabel('Note (not visible to member)').click();
-            await this.page.getByLabel('Note (not visible to member)').press('CapsLock');
-            //await this.page.getByLabel('Note (not visible to member)').fill(`${nota}`);
-            await this.page.screenshot({path:'src/test/screenshots/Member.png'});
-         
+            await this.page.getByLabel('Note (not visible to member)').fill('hola 111');
             await this.page.getByRole('button', { name: 'Save' }).click();
-            await this.page.screenshot({path:'src/test/screenshots/z2.png'});
+           // await this.page.getByRole('button', { name: 'Save' }).click();
+           
                }
 
-               async editMailMembers(username:string,newmail:string){
-                await this.page.goto('http://localhost:2368/ghost/#/members');
-                //await this.page.getByRole('link', { name: 'New member' }).click();
-                     //await new Promise(r => setTimeout(r, 3000));
-             //    await this.page.getByRole('link', { name: 'Members' }).click();
-             //     await this.page.getByLabel('Name').click();
-             //     await this.page.getByLabel('Name').press('CapsLock');
-                 // await this.page.getByLabel('Name').fill(`${username}`);
-                 // await this.page.getByLabel('Email').click();
-                 //await this.page.getByRole('link', { name: 'Members' }).click();
-                 //await new Promise(r => setTimeout(r, 3000));
+
+
+           
+               async seachMember(username:string,newmail:string){
+
                 
-                await this.page.getByRole('link', { name: `${username}` }).click();
-                // await this.page.screenshot({path:'6.png'});
-                 //await this.page.getByLabel('Name').click();
-                // await this.page.getByLabel('Name').fill(`${newusername}`);
-                 // await this.page.getByLabel('Email').fill(`${newusermail}`);
-                 //await this.page.screenshot({path: '4.newMenber.png'});
-                // await this.page.getByLabel('Email').click();
-                 await this.page.screenshot({path:'src/test/screenshots/7.png'});
-                 await this.page.getByLabel('Email').fill(`${newmail}`);
-                 await this.page.getByText('(not visible to member)').click();
-                 await this.page.getByLabel('Note (not visible to member)').click();
-                 await this.page.getByLabel('Note (not visible to member)').press('CapsLock');
-                 //await this.page.getByLabel('Note (not visible to member)').fill(`${nota}`);
-                // await this.page.screenshot({path:'Member.png'});
-              
-                 await this.page.getByRole('button', { name: 'Save' }).click();
+
+                
+                await this.page.getByRole('link', { name:`${username} ${newmail}`}).click();
+               
+                 
+                
+                 //await this.page.getByRole('link', { name: 'rrr@hotmail1.com' }).click();
+                 await this.page.screenshot({path: 'z1.sechMember.png'});
+                }
+           async editMailMembers(username:string,newmail:string){
+ 
+          
+            await this.page.getByLabel('Email').click();
+            //await this.page.getByLabel('Email').fill('rrr@hotmail2.com');
+            await this.page.getByLabel('Email').fill(`${username}${newmail}`);
+            
+          //  await this.page.getByLabel('Note (not visible to member)').click();
+           // await this.page.getByLabel('Note (not visible to member)').fill('hola 112');
+            await this.page.getByRole('button', { name: 'Save' }).click();
+            await new Promise(r => setTimeout(r, 1000)); 
                }
     async checks_publish_exist(){
         const publishButton = await this.page.$('text="Publish"');
@@ -273,7 +307,14 @@ export class PrincipalPage{
         }
     }       
     
-
+    async editNameMember(username:string,newmail:string){
+//trabajando
+//await this.page.getByRole('link', { name: 'Members 14' }).click();
+//await this.page.getByRole('link', { name: 'Abigale LulaCorreoEditadoFaker@hotmail.com' }).click();
+await this.page.getByLabel('Name').click();
+await this.page.getByLabel('Name').fill(`${username}`);
+await this.page.getByRole('button', { name: 'Save' }).click();
+    }
 }
 export class PrincipalPage3_42{
     page: Page
@@ -406,7 +447,7 @@ export class PrincipalPage3_42{
         await this.page.getByRole('link', { name: 'Staff' }).click();
     }
     async go_to_url_staft(){
-        await this.page.goto("http://localhost:3001/ghost/#/staff")
+        await this.page.goto('http://localhost:3001/ghost/#/staff');
     }
    
 
@@ -441,6 +482,7 @@ export class PrincipalPage3_42{
          await this.page.getByRole('button', { name: 'Send invitation now' }).click();
          await this.page.waitForTimeout(1000);
     }
+
 
     
     async  revoke(){
