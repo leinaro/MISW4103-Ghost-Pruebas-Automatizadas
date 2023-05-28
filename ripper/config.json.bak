@@ -1,0 +1,11 @@
+{
+    "url": "http://localhost:3001/ghost/",
+    "headless": true,
+    "depthLevels": 2,
+    "inputValues": true,
+    "values": {
+        "ember8":"user@gmail.com",
+		"ember10":"Admin123456!"
+    },
+    "browsers": ["chromium"]
+}
